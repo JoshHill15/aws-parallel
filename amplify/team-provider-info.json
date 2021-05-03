@@ -10,6 +10,11 @@
       "StackName": "amplify-awsparallel-dev-141253",
       "StackId": "arn:aws:cloudformation:us-east-1:430079601105:stack/amplify-awsparallel-dev-141253/2f97d660-ac3b-11eb-b45c-0ead09d00613",
       "AmplifyAppId": "d3dafneah1gty9"
+    },
+    "categories": {
+      "auth": {
+        "awsparallel17452c78": {}
+      }
     }
   }
 }
