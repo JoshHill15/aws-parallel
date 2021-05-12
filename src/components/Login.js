@@ -21,10 +21,21 @@ function Login() {
               placeholder: "custom password placeholder",
               required: true,
             },
+            {
+              label: "Instructor or Student",
+              "custom:Instructors": "custom:Instructors",
+              placeholder: "Instructor/Student",
+              required: true,
+              displayOrder: 5
+            },
           ]} 
+
+
         />
         <AmplifySignIn slot="sign-in" usernameAlias="email" />
       </AmplifyAuthenticator>
+
+      
     )
 }
 

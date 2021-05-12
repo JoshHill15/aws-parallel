@@ -1,9 +1,13 @@
 import React from 'react';
+import Dashboard from './components/Dashboard';
 import Login from "./components/Login"
 
 const App = () => {
   return (
-    <Login />
+    <div>
+      <Login />
+      <Dashboard />
+    </div>
   );
 };
 
