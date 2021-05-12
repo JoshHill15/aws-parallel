@@ -1,14 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import React from 'react';
+import { AmplifyAuthenticator, AmplifySignUp, AmplifySignIn } from '@aws-amplify/ui-react';
 
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <AmplifySignOut />
-    </div>
+    <AmplifyAuthenticator usernameAlias="email">
+      <AmplifySignUp
+        slot="sign-up"
+        usernameAlias="email"
+        formFields={[
+          {
+            type: "email",
+            label: "Enter Email",
+            placeholder: "custom email placeholder",
+            required: true,
+          },
+          {
+            type: "password",
+            label: "Enter Password",
+            placeholder: "custom password placeholder",
+            required: true,
+          },
+        ]} 
+      />
+      <AmplifySignIn slot="sign-in" usernameAlias="email" />
+    </AmplifyAuthenticator>
   );
-}
+};
 
-export default withAuthenticator(App);
+export default App
