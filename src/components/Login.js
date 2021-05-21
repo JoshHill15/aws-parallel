@@ -22,8 +22,8 @@ function Login() {
               required: true,
             },
             {
+              type: "custom:Instructors",
               label: "Instructor or Student",
-              "custom:Instructors": "custom:Instructors",
               placeholder: "Instructor/Student",
               required: true,
               displayOrder: 5
