@@ -1,0 +1,14 @@
+@import url(//db.onlinewebfonts.com/c/157c6cc36dd65b1b2adc9e7f3329c761?family=Amazon+Ember);
+
+.main-div {
+    background-color: #FF9C09;
+    display: flex;
+    height: 10%;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    font-size: 0.975rem;
+    font-weight: 600;
+    font-family:"Amazon Ember";
+    cursor: pointer;
+}
