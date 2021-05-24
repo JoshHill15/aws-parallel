@@ -12,7 +12,7 @@ function Dashboard(){
             const decodedToken = decode(JWT)
             // console.log(decodedToken)
             const userGroup = decodedToken["cognito:groups"][0]
-            console.log(userGroup)
+            console.log("user",userGroup)
             localStorage.setItem("userGroup", userGroup)
     
         })
