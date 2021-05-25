@@ -7,6 +7,7 @@ function StudentHeader() {
     return (
         <div>
             <p>Home</p>
+            <p>Problems</p>
             <p><AmplifySignOut /></p>
         </div>
     )
