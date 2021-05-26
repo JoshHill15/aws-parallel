@@ -5,8 +5,9 @@ import { AmplifySignOut } from '@aws-amplify/ui-react'
 function StudentHeader() {
 
     return (
-        <div>
+        <div className="main-div">
             <p>Home</p>
+            <p>Problems </p>
             <p><AmplifySignOut /></p>
         </div>
     )

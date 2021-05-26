@@ -1,14 +1,17 @@
 import React from "react"
 import "../styles/InstructorHeader.css"
 import { AmplifySignOut } from '@aws-amplify/ui-react'
+import { Link } from "react-router-dom";
+
 
 function InstructorHeader() {
 
     return (
         <div className="main-div">
-            <p>Home</p>
-            <p>Submissions</p>
-            <p><AmplifySignOut /></p>
+            <Link className="links" to="/">Home</Link>
+            <Link className="links" to="/problems">Problems</Link>
+            <Link className="links" to="/students">Students</Link>
+            <AmplifySignOut />
         </div>
     )
 }

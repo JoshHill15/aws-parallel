@@ -2,7 +2,6 @@ import React from "react"
 import { AmplifyAuthenticator, AmplifySignUp, AmplifySignIn } from '@aws-amplify/ui-react';
 
 function Login() {
-
     return (
         <AmplifyAuthenticator usernameAlias="email">
          <AmplifySignUp
@@ -12,13 +11,13 @@ function Login() {
             {
               type: "email",
               label: "Enter Email",
-              placeholder: "custom email placeholder",
+              placeholder: "Enter Email",
               required: true,
             },
             {
               type: "password",
               label: "Enter Password",
-              placeholder: "custom password placeholder",
+              placeholder: "Enter Password",
               required: true,
             },
             {
