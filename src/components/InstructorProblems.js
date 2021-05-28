@@ -1,45 +1,44 @@
-import React, { useRef, useState } from "react"
-import { Form } from 'react-bootstrap';
+import React from "react"
+import { Table } from 'react-bootstrap';
+import { Link } from "react-router-dom"
 
 function InstructorProblems(){
-    const [CFFile, setCFFile] = useState("")
-    const [diagram, setDiagram] = useState("")
-    const textBoxData = useRef()
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        
-        const instructorSubmission = {
-            CFFile,
-            diagram,
-            textBoxData: textBoxData.current.value
-        }
-
-        // api call 
-
-
-        textBoxData.current.value = ""
-    };
-    
     return (
         <div>
-            <Form>
-                <Form.Group>
-                    <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0].name)}/>
-                    <Form.File id="exampleFormControlFile1" label="Upload Architecture Diagram" onChange = {e => setDiagram(e.target.files[0].name)}/>
-                </Form.Group>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label onChange={e => console.log(e.target.value)}>Input Problem Scenario</Form.Label>
-                    <Form.Control ref={textBoxData} as="textarea" rows={6} />
-                </Form.Group>
-                <Form.Group>
-                    <button onClick={handleSubmit}>
-                        Submit
-                    </button>
-                </Form.Group>
-            </Form>
-                {/* <button onClick={handleClick}>Upload a file </button>
-                <input onChange={handleChange} type="file" style={{display:'none'}} ref={hiddenFileInput}/>  */}
+            <Link to="problems/create-problem">
+                <button>Create Problem</button>
+            </Link>
+
+                <Table variant="dark">
+                 <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                    <tr>
+                        <td>1</td>
+                        {Array.from({ length: 2 }).map((_, index) => (
+                        <td key={index}>Problem {index + 1}</td>
+                        ))}
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        {Array.from({ length: 2 }).map((_, index) => (
+                        <td key={index}>Table cell {index}</td>
+                        ))}
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        {Array.from({ length: 2 }).map((_, index) => (
+                        <td key={index}>Table cell {index}</td>
+                        ))}
+                    </tr>
+                </tbody>
+                </Table>
         </div>
     )
 }
