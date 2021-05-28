@@ -50,9 +50,9 @@ const listener = (data) => {
             break;
         case 'signUp':
             logger.info('user signed up');
-            // getUserGroup()
-            // const g = localStorage.getItem("userGroup")
-            // setUserGroup(g)
+            getUserGroup()
+            const g = localStorage.getItem("userGroup")
+            setUserGroup(g)
 
             break;
         case 'signOut':
@@ -84,8 +84,8 @@ Hub.listen('auth', listener);
   return (
     <div>
       {routeToCorrectHeader()}
-      <Route exact={true} path="/" render={(props) => <Login {...props} setUserGroup={setUserGroup} />}/>
-      <Route exact={true} path="/" render={(props) => <Dashboard {...props} setUserGroup={setUserGroup} />}/>
+      <Route exact={true} path="/" component={Login}/>
+      <Route exact={true} path="/" component={Dashboard}/>
       <Route exact={true} path="/problems" component={InstructorProblems} />
       <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
     </div>
