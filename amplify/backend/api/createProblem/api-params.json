@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/createProblem",
+            "lambdaFunction": "createProblem",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/createProblem"
+        }
+    ],
+    "resourceName": "createProblem",
+    "apiName": "createProblem",
+    "functionArns": [
+        {
+            "lambdaFunction": "createProblem"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+        "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "createProblem",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

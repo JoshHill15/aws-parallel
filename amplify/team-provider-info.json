@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "awsparallel17452c78": {}
+      },
+      "function": {
+        "createProblem": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/createProblem-6942616543493851344e-build.zip"
+        }
       }
     }
   }

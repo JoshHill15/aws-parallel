@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
+import { API } from "aws-amplify"
 
 function CreateProblem(){
     const [CFFile, setCFFile] = useState("")
@@ -15,8 +16,22 @@ function CreateProblem(){
             textBoxData: textBoxData.current.value
         }
 
-        // api call 
+        console.log(instructorSubmission)
 
+        // api call 
+        const apiName = "createProblem"
+        const path = "/createProblem"
+        const myInit = {
+            body: instructorSubmission
+        }
+
+        API.post(apiName, path, myInit)
+            .then(response => {
+                console.log({response})
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
 
         textBoxData.current.value = ""
     };
@@ -38,8 +53,6 @@ function CreateProblem(){
                     </button>
                 </Form.Group>
             </Form>
-                {/* <button onClick={handleClick}>Upload a file </button>
-                <input onChange={handleChange} type="file" style={{display:'none'}} ref={hiddenFileInput}/>  */}
         </div>
     )
 }
