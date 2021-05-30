@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Dashboard from './components/Dashboard';
 import Login from "./components/Login"
 import { Route, useHistory } from "react-router-dom";
+import "./App.css";
 import InstructorProblems from './components/InstructorProblems';
 import { Auth, Hub, Logger } from "aws-amplify"
 import decode from "jwt-decode"
 import InstructorHeader from "./components/InstructorHeader"
 import StudentHeader from "./components/StudentHeader"
 import CreateProblem from './components/CreateProblem';
+import StudentProblems from './components/StudentProblems';
 
 const App = () => {
   const history = useHistory()
@@ -32,7 +34,7 @@ const App = () => {
 
     function routeToCorrectHeader() {
       if (userGroup === "Instructors") return <InstructorHeader setUserGroup={setUserGroup}/>
-      if (userGroup === "Students") return <StudentHeader />
+      if (userGroup === "Students") return <StudentHeader setUserGroup={setUserGroup} />
       else return null
     }
     
@@ -88,6 +90,7 @@ Hub.listen('auth', listener);
       <Route exact={true} path="/" component={Dashboard}/>
       <Route exact={true} path="/problems" component={InstructorProblems} />
       <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
+      <Route exact={true} path="/studentproblems" component={StudentProblems} />
     </div>
   );
 };
