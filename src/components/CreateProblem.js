@@ -6,11 +6,13 @@ function CreateProblem(){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
+    const [problemName, setProblemName] = useState("")
 
     const handleSubmit = e => {
         e.preventDefault()
         
         const instructorSubmission = {
+            problemName,
             CFFile,
             diagram,
             textBoxData: textBoxData.current.value
@@ -34,17 +36,22 @@ function CreateProblem(){
             })
 
         textBoxData.current.value = ""
+        setProblemName("")
     };
     
     return (
         <div>
             <Form>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Problem Name</Form.Label>
+                    <Form.Control value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" />
+                </Form.Group>
                 <Form.Group>
                     <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0].name)}/>
                     <Form.File id="exampleFormControlFile1" label="Upload Architecture Diagram" onChange = {e => setDiagram(e.target.files[0].name)}/>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label onChange={e => console.log(e.target.value)}>Input Problem Scenario</Form.Label>
+                    <Form.Label>Input Problem Scenario</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={6} />
                 </Form.Group>
                 <Form.Group>
