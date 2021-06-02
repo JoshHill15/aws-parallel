@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
+import "../styles/createProblem.css"
 
 function CreateProblem(){
     const [CFFile, setCFFile] = useState("")
@@ -9,6 +10,7 @@ function CreateProblem(){
     const [problemName, setProblemName] = useState("")
 
     const handleSubmit = e => {
+        //submit fields to lambda function
         e.preventDefault()
         
         const instructorSubmission = {
@@ -40,13 +42,13 @@ function CreateProblem(){
     };
     
     return (
-        <div>
-            <Form>
+        <div className="container">
+            <Form >
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Problem Name</Form.Label>
-                    <Form.Control value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" />
+                    <Form.Control size='lg' value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group className="upload-fields">
                     <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0].name)}/>
                     <Form.File id="exampleFormControlFile1" label="Upload Architecture Diagram" onChange = {e => setDiagram(e.target.files[0].name)}/>
                 </Form.Group>
@@ -55,7 +57,7 @@ function CreateProblem(){
                     <Form.Control ref={textBoxData} as="textarea" rows={6} />
                 </Form.Group>
                 <Form.Group>
-                    <button onClick={handleSubmit}>
+                    <button className="submit" onClick={handleSubmit}>
                         Submit
                     </button>
                 </Form.Group>

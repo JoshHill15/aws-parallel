@@ -17,3 +17,8 @@
     color:white;
     text-decoration: none;
 }
+
+.links:hover {
+    color: #FFE6C1;
+    text-decoration: none;
+}

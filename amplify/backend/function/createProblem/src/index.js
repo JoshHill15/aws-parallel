@@ -1,9 +1,7 @@
 
 
 exports.handler = async (event) => {
-    const { body } = event
-    console.log("body: ",body)
-
+    // TODO implement
     const response = {
         statusCode: 200,
     //  Uncomment below to enable CORS requests
