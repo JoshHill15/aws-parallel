@@ -9,6 +9,7 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import { AmplifySignOut } from '@aws-amplify/ui-react'
 import { Link } from "react-router-dom";
 
+//Created a obj to use the styles from the Material ui libary that we use for the Avatar icon.
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -27,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function StudentHeader() {
+    //added variable to utilize the obj created above
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -43,16 +45,15 @@ function StudentHeader() {
             <Link className="links" to="/">Home</Link>
             <Link className="links" to="/studentProblems">Problems</Link>
             <AmplifySignOut />
-            <Avatar  aria-haspopup="true" aria-controls="simple-menu" onClick={handleClick} className={classes.orange}>MC</Avatar>
+            <Avatar aria-haspopup="true" aria-controls="simple-menu" onClick={handleClick} className={classes.orange}>MC</Avatar>
             <Menu id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={handleClose}
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <Link className="links" to="/myaccount"><MenuItem onClick={handleClose}>My Account</MenuItem></Link>
             </Menu>
         </div>
     )
