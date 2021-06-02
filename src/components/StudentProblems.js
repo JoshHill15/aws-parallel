@@ -1,6 +1,7 @@
 import React from "react"
 // import Table from 'react-bootstrap/Table';
 import * as ReactBootStrap from "react-bootstrap";
+import { DataGrid } from '@material-ui/data-grid';
 
 function StudentProblems() {
     const problems = [
