@@ -1,14 +1,14 @@
 import React from "react"
-import { Table } from 'react-bootstrap';
 import { Link } from "react-router-dom"
 import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
+
 function InstructorProblems(){
     const columns = [
         { field: 'id', headerName: 'ID', width: 125 },
         { field: 'problemName', headerName: 'Problem Name', width: 300 },
         { field: 'problemDescription', headerName: 'Problem Description', width: 300 },
-        { field: 'diagram', headerName: 'diagram', width: 300 }
+        { field: 'diagram', headerName: 'Diagram', width: 300 }
       ];
 
       const rows = [

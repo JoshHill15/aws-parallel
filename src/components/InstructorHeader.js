@@ -11,7 +11,7 @@ function InstructorHeader() {
             <Link className="links" to="/">Home</Link>
             <Link className="links" to="/problems">Problems</Link>
             <Link className="links" to="/students">Students</Link>
-            <AmplifySignOut />
+            <AmplifySignOut  />
         </div>
     )
 }

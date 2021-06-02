@@ -10,6 +10,7 @@ import InstructorHeader from "./components/InstructorHeader"
 import StudentHeader from "./components/StudentHeader"
 import CreateProblem from './components/CreateProblem';
 import StudentProblems from './components/StudentProblems';
+import InstructorsStudents from './components/InstructorsStudent';
 
 const App = () => {
   const history = useHistory()
@@ -33,8 +34,8 @@ const App = () => {
     },[userGroup])
 
     function routeToCorrectHeader() {
-      if (userGroup === "Instructors") return <InstructorHeader setUserGroup={setUserGroup}/>
-      if (userGroup === "Students") return <StudentHeader setUserGroup={setUserGroup} />
+      if (userGroup === "Instructors") return <InstructorHeader />
+      if (userGroup === "Students") return <StudentHeader />
       else return null
     }
     
@@ -91,6 +92,7 @@ Hub.listen('auth', listener);
       <Route exact={true} path="/problems" component={InstructorProblems} />
       <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
       <Route exact={true} path="/studentproblems" component={StudentProblems} />
+      <Route exact={true} path="/students" component={InstructorsStudents} />
     </div>
   );
 };
