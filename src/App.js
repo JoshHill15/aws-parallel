@@ -12,6 +12,7 @@ import CreateProblem from './components/CreateProblem';
 import StudentProblems from './components/StudentProblems';
 import MyAccount from './components/MyAccount';
 import Problem from './components/Problem';
+import InstructorsStudents from './components/InstructorsStudents';
 
 const App = () => {
     const history = useHistory()
@@ -113,6 +114,7 @@ const App = () => {
             <Route exact={true} path="/problems" component={InstructorProblems} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
             <Route exact={true} path="/studentproblems" component={StudentProblems} />
+            <Route exact={true} path="/students" component={InstructorsStudents} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem" component={Problem} />
         </div>

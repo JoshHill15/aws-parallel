@@ -1,0 +1,22 @@
+.container {
+    background: #FAFAFA;
+    height: 800;
+    padding:5%;
+    font-size: larger;
+    margin-top: 3%;
+}
+.upload-fields{
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.submit {
+    background: #EC7211;
+    color: white;
+    font-weight: 500;
+    padding: 1% 3%;
+}
+.submit:hover {
+    color: #FFE6C1;
+}
