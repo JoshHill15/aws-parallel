@@ -42,8 +42,8 @@ function StudentHeader() {
 
     return (
         <div className="main-div">
-            <Link className="links" to="/">Home</Link>
-            <Link className="links" to="/studentProblems">Problems</Link>
+            <Link className="links" style={{ textDecoration: 'none' }} to="/">Home</Link>
+            <Link className="links" style={{ textDecoration: 'none' }} to="/studentProblems">Problems</Link>
             <AmplifySignOut />
             <Avatar aria-haspopup="true" aria-controls="simple-menu" onClick={handleClick} className={classes.orange}>MC</Avatar>
             <Menu id="simple-menu"
@@ -53,7 +53,9 @@ function StudentHeader() {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <Link className="links" to="/myaccount"><MenuItem onClick={handleClose}>My Account</MenuItem></Link>
+                <Link className="links" style={{ textDecoration: 'none' }} to="/myaccount">
+                    <MenuItem style={{ paddingLeft: 13 }} onClick={handleClose}>My Account</MenuItem>
+                </Link>
             </Menu>
         </div>
     )

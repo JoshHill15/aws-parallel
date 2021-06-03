@@ -1,9 +1,10 @@
 import React from "react"
 
+
 function MyAccount() {
 
     return (
-        <form>
+        <form align="center">
             <label>
                 My Account Information:
             </label><br />

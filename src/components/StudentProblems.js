@@ -1,6 +1,7 @@
 import React from "react"
 // import Table from 'react-bootstrap/Table';
 import * as ReactBootStrap from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { DataGrid } from '@material-ui/data-grid';
 
 function StudentProblems() {
@@ -31,7 +32,14 @@ function StudentProblems() {
                     </tr>
                 </thead>
                 <tbody>
-                   {problems.map(renderProblem)}
+                    <tr>
+                    <Link className="links" style={{ textDecoration: 'none' }} to="/problem">
+                        <th>Problem</th>
+                    </Link>
+                        <th>09/21/2021</th>
+                        <th>Not Started</th>
+                    </tr>
+                   {/* {problems.map(renderProblem)} */}
                 </tbody>
             </ReactBootStrap.Table>
         </div>
