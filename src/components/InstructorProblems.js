@@ -2,7 +2,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
-
 function InstructorProblems(){
     const columns = [
         { field: 'id', headerName: 'ID', width: 125 },
@@ -10,7 +9,6 @@ function InstructorProblems(){
         { field: 'problemDescription', headerName: 'Problem Description', width: 300 },
         { field: 'diagram', headerName: 'Diagram', width: 300 }
       ];
-
       const rows = [
         { id: 1, problemName: 'first prob', problemDescription: 'desc', diagram: "link to diagram"},
         { id: 2, problemName: 'Lannister', problemDescription: 'Cersei', diagram: 42 },
@@ -22,8 +20,6 @@ function InstructorProblems(){
         { id: 8, problemName: 'Frances', problemDescription: 'Rossini', diagram: 36 },
         { id: 9, problemName: 'Roxie', problemDescription: 'Harvey', diagram: 65 },
       ];
-
-
     return (
         <div>
             <div className="createProblemContainer">
@@ -37,5 +33,4 @@ function InstructorProblems(){
         </div>
     )
 }
-
 export default InstructorProblems

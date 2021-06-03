@@ -2,33 +2,27 @@ import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
 import "../styles/createProblem.css"
-
 function CreateProblem(){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const [problemName, setProblemName] = useState("")
-
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
-        
         const instructorSubmission = {
             problemName,
             CFFile,
             diagram,
             textBoxData: textBoxData.current.value
         }
-
         console.log(instructorSubmission)
-
         // api call 
         const apiName = "createProblem"
         const path = "/createProblem"
         const myInit = {
             body: instructorSubmission
         }
-
         API.post(apiName, path, myInit)
             .then(response => {
                 console.log({response})
@@ -36,11 +30,9 @@ function CreateProblem(){
             .catch(error => {
                 console.log(error.response)
             })
-
         textBoxData.current.value = ""
         setProblemName("")
     };
-    
     return (
         <div className="container">
             <Form >
@@ -65,5 +57,4 @@ function CreateProblem(){
         </div>
     )
 }
-
 export default CreateProblem
