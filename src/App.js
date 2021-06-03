@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Dashboard from './components/Dashboard';
+import Home from './components/Home';
 import Login from "./components/Login"
 import { Route, useHistory } from "react-router-dom";
 import "./App.css";
@@ -49,6 +49,8 @@ const listener = (data) => {
             getUserGroup()
             const group = localStorage.getItem("userGroup")
             setUserGroup(group)
+            history.push("/home")
+
 
             break;
         case 'signUp':
@@ -56,6 +58,7 @@ const listener = (data) => {
             getUserGroup()
             const g = localStorage.getItem("userGroup")
             setUserGroup(g)
+            history.push("/home")
 
             break;
         case 'signOut':
@@ -88,7 +91,7 @@ Hub.listen('auth', listener);
     <div>
       {routeToCorrectHeader()}
       <Route exact={true} path="/" component={Login}/>
-      <Route exact={true} path="/" component={Dashboard}/>
+      <Route exact={true} path="/home" component={Home}/>
       <Route exact={true} path="/problems" component={InstructorProblems} />
       <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
       <Route exact={true} path="/studentproblems" component={StudentProblems} />

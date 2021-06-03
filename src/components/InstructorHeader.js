@@ -8,7 +8,7 @@ function InstructorHeader() {
 
     return (
         <div className="main-div">
-            <Link className="links" to="/">Home</Link>
+            <Link className="links" to="/home">Home</Link>
             <Link className="links" to="/problems">Problems</Link>
             <Link className="links" to="/students">Students</Link>
             <AmplifySignOut  />

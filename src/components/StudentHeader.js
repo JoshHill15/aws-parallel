@@ -8,7 +8,7 @@ function StudentHeader() {
 
     return (
         <div className="main-div">
-            <Link className="links" to="/">Home</Link>
+            <Link className="links" to="/home">Home</Link>
             <Link className="links" to="/studentProblems">Problems</Link>
             <AmplifySignOut />
         </div>
