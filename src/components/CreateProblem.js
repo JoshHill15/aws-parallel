@@ -7,6 +7,15 @@ function CreateProblem(){
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const [problemName, setProblemName] = useState("")
+    var email;
+    
+    //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
+    for (var key in localStorage){
+        if (key.match(/AuthUser$/g)) {
+            email = localStorage.getItem(key)
+        }
+    }
+
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
@@ -14,9 +23,13 @@ function CreateProblem(){
             problemName,
             CFFile,
             diagram,
-            textBoxData: textBoxData.current.value
+            textBoxData: textBoxData.current.value,
+            email
         }
         console.log(instructorSubmission)
+
+       // console.log(instructorSubmission)
+
         // api call 
         const apiName = "createProblem"
         const path = "/createProblem"
