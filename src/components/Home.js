@@ -1,10 +1,19 @@
 import React from "react"
+import "../styles/Home.css"
 
-function Home(){
-    
+function Home() {
+
     return (
         <div>
-            This is the Home
+            <div className="container">
+                <div className="left">
+                    <p>Problem Name</p>
+                    <p>Problem Description</p>
+                </div>
+                <div>
+                    <p className="image">diagram</p>
+                </div>
+            </div>
         </div>
     )
 }

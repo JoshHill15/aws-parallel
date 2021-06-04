@@ -16,8 +16,6 @@ function InstructorProblems(){
 
         }
     }
-    console.log(process.env.HEY, "LDKFJLS")
-    console.log(process.env)
 
     useEffect(() => getInstructorProblems(),[])
 

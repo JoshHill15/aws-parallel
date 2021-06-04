@@ -1,0 +1,16 @@
+.container {
+    border: 2px solid red;
+    display: flex;
+}
+
+.left {
+    border: 2px solid green;
+    height: 100%;
+    width:50%;
+}
+
+.image {
+    border: 2px solid blue;
+    width:50%;
+
+}
