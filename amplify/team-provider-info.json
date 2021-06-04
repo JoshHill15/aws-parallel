@@ -24,6 +24,17 @@
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
           "s3Key": "amplify-builds/instructorProblems-6b6a536863324d464c66-build.zip"
         }
+      },
+      "storage": {
+        "createProblem": {
+          "tableName": "createProblem",
+          "region": "us-east-1",
+          "arn": "arn:aws:dynamodb:us-east-1:430079601105:table/createProblem",
+          "partitionKeyName": "instructor_email",
+          "partitionKeyType": "S",
+          "sortKeyName": "problemID",
+          "sortKeyType": "N"
+        }
       }
     }
   }

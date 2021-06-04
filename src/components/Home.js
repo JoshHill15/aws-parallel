@@ -5,7 +5,7 @@ function Home() {
 
     return (
         <div>
-            <div className="container">
+            <div className="container-home">
                 <div className="left">
                     <p>Problem Name</p>
                     <p>Problem Description</p>

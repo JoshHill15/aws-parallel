@@ -62,5 +62,13 @@
         }
       ]
     }
+  },
+  "storage": {
+    "createProblem": {
+      "service": "DynamoDB",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

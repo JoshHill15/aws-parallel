@@ -28,7 +28,6 @@ function CreateProblem(){
         }
         console.log(instructorSubmission)
 
-       // console.log(instructorSubmission)
 
         // api call 
         const apiName = "createProblem"

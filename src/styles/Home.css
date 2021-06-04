@@ -1,5 +1,5 @@
-.container {
-    border: 2px solid red;
+.container-home {
+    border: 2px solid orange;
     display: flex;
 }
 
