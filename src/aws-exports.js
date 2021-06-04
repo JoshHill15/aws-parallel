@@ -13,6 +13,18 @@ const awsmobile = {
             "name": "createProblem",
             "endpoint": "https://s4favscooa.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
+        },
+        {
+            "name": "instructorProblems",
+            "endpoint": "https://o1evjpipw9.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        }
+    ],
+    "aws_dynamodb_all_tables_region": "us-east-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "createProblem",
+            "region": "us-east-1"
         }
     ]
 };

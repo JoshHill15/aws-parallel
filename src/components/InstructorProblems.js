@@ -1,8 +1,27 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
+import { API } from "aws-amplify"
+
 function InstructorProblems(){
+
+    async function getInstructorProblems(){
+        try {
+            const res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", {})
+            console.log({res})
+        }
+        catch(err) {
+            console.error("err: ", err)
+
+        }
+    }
+    console.log(process.env.HEY, "LDKFJLS")
+    console.log(process.env)
+
+    useEffect(() => getInstructorProblems(),[])
+
+
     const columns = [
         { field: 'id', headerName: 'ID', width: 125 },
         { field: 'problemName', headerName: 'Problem Name', width: 300 },
