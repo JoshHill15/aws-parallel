@@ -30,20 +30,20 @@ function Problem(){
 
         // api call
         //TODO 
-        // const apiName = "problemSubmission"
-        // const path = "/problemSubmission"
-        // const myInit = {
-        //     body: studentSubmission
-        // }
-        // API.post(apiName, path, myInit)
-        //     .then(response => {
-        //         console.log({response})
-        //     })
-        //     .catch(error => {
-        //         console.log(error.response)
-        //     })
-        // textBoxData.current.value = ""
-        // setProblemName("")
+        const apiName = "studentSubmissions"
+        const path = "/studentSubmissions/:id"
+        const myInit = {
+            body: studentSubmission
+        }
+        API.post(apiName, path, myInit)
+            .then(response => {
+                console.log({response})
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
+        textBoxData.current.value = ""
+        setProblemName("")
     };
     return (
         <div className="container">
