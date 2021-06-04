@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/instructorProblems",
+            "lambdaFunction": "instructorProblems",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/instructorProblems"
+        }
+    ],
+    "resourceName": "instructorProblems",
+    "apiName": "instructorProblems",
+    "functionArns": [
+        {
+            "lambdaFunction": "instructorProblems"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+        "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "instructorProblems",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

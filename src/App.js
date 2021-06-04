@@ -17,8 +17,8 @@ import InstructorsStudents from './components/InstructorsStudents';
 const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
-    const [isAuthenticating, setIsAuthenticating] = useState(true);
-    const [isAuthenticated, userHasAuthenticated] = useState(false);
+    // const [isAuthenticating, setIsAuthenticating] = useState(true);
+    // const [isAuthenticated, userHasAuthenticated] = useState(false);
 
     // useEffect(() => {
     //     onload();

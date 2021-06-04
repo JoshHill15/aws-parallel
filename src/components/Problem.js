@@ -1,24 +1,71 @@
-import React from "react"
-import {DataGrid} from '@material-ui/data-grid'
-
+import React, { useRef, useState } from "react"
+import { Form } from 'react-bootstrap';
+import { API } from "aws-amplify"
+import "../styles/createProblem.css"
 function Problem(){
-    const columns = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'problem', headerName: 'Problem Statement', width: 150 },
-        { field: 'date', headerName: 'Due Date', width: 150 },
-        { field: 'status', headerName: 'Status', width: 150 }
-    ];
+    const [CFFile, setCFFile] = useState("")
+    const [diagram, setDiagram] = useState("")
+    const textBoxData = useRef()
+    const [problemName, setProblemName] = useState("")
+    var email;
+    
+    //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
+    for (var key in localStorage){
+        if (key.match(/AuthUser$/g)) {
+            email = localStorage.getItem(key)
+        }
+    }
 
-    const rows = [
-        { id: 1, problem: 'Create this vpc', date: '09/21/2021', status: 'Not Started'}
+    const handleSubmit = e => {
+        //submit fields to lambda function
+        e.preventDefault()
+        const studentSubmission = {
+            CFFile,
+            textBoxData: textBoxData.current.value,
+            email
+        }
+        console.log(studentSubmission)
 
-    ]
+       // console.log(instructorSubmission)
+
+        // api call
+        //TODO 
+        // const apiName = "problemSubmission"
+        // const path = "/problemSubmission"
+        // const myInit = {
+        //     body: studentSubmission
+        // }
+        // API.post(apiName, path, myInit)
+        //     .then(response => {
+        //         console.log({response})
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response)
+        //     })
+        // textBoxData.current.value = ""
+        // setProblemName("")
+    };
     return (
-        <div style={{ display: 'flex' }}>
-            
-            <DataGrid rows={rows} columns={columns} pageSize={5} checkboxSelection />
+        <div className="container">
+            <Form >
+                <Form.Group controlId="formBasicEmail">
+                    {/* <Form.Label>Problem Name</Form.Label>
+                    <Form.Control size='lg' value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" /> */}
+                </Form.Group>
+                <Form.Group className="upload-fields">
+                    <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Input Feedback</Form.Label>
+                    <Form.Control ref={textBoxData} as="textarea" rows={6} />
+                </Form.Group>
+                <Form.Group>
+                    <button className="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </Form.Group>
+            </Form>
         </div>
     )
 }
-
 export default Problem
