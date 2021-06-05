@@ -78,6 +78,7 @@ const App = () => {
                 logger.info('user signed up');
                 getUserGroup()
                 const g = localStorage.getItem("userGroup")
+                localStorage.setItem("total-problems", 0)
                 setUserGroup(g)
                 history.push("/home")
 

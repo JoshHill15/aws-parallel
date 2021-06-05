@@ -17,7 +17,25 @@ function InstructorProblems(){
         }
     }
 
+    async function getInstructorProblem(){
+        const myInit = {
+            queryStringParameters: {
+                instructor_email: "josh_hill15@me.com",
+                problemID: 2
+            }
+        }
+        try {
+            const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
+            console.log({result})
+        }
+        catch(err) {
+            console.error("err: ", err)
+        }
+    }
+
     useEffect(() => getInstructorProblems(),[])
+    useEffect(() => getInstructorProblem(),[])
+
 
 
     const columns = [
