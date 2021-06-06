@@ -53,14 +53,12 @@ const convertUrlType = (param, type) => {
       return param;
   }
 }
-console.log("path: ", path, "hashkeypath", hashKeyPath, "sorkeypath", sortKeyPath)
 
 /********************************
  * HTTP Get method for list objects *
  ********************************/
 
 app.get(path + hashKeyPath, function(req, res) {
-  console.log("the req.query",req.query)
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -82,11 +80,11 @@ app.get(path + hashKeyPath, function(req, res) {
     KeyConditions: condition
   }
 
-console.log(queryParams)
+  // console.log("queryparams",queryParams)
+  // console.log("keyconditions", queryParams.KeyConditions.instructor_email.AttributeValueList)
 
   dynamodb.query(queryParams, (err, data) => {
     if (err) {
-      console.log("here",err)
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err});
     } else {
@@ -99,10 +97,6 @@ console.log(queryParams)
  * HTTP Get method for get single object *
  *****************************************/
 app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
-  console.log("params",req.params)
-  console.log("req.query", req.query)
-
-
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -129,20 +123,17 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     Key: params
   }
 
-  console.log("getitemparams", getItemParams)
+  // console.log("getitemparams", getItemParams)
 
   dynamodb.get(getItemParams,(err, data) => {
     if(err) {
-      console.log("dynamo if", err.message)
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err.message});
     } else {
       if (data.Item) {
-        console.log("dynamo else if")
         res.json(data.Item);
       } else {
         res.json(data) ;
-        console.log("else else dynamo")
       }
     }
   });
