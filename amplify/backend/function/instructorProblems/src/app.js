@@ -60,6 +60,7 @@ console.log("path: ", path, "hashkeypath", hashKeyPath, "sorkeypath", sortKeyPat
  ********************************/
 
 app.get(path + hashKeyPath, function(req, res) {
+  console.log("the req.query",req.query)
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -69,8 +70,7 @@ app.get(path + hashKeyPath, function(req, res) {
     condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
   } else {
     try {
-      console.log("try else")
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
+      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.query[partitionKeyName], partitionKeyType) ];
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
@@ -82,10 +82,11 @@ app.get(path + hashKeyPath, function(req, res) {
     KeyConditions: condition
   }
 
+console.log(queryParams)
 
-
-  dynamodb.scan(queryParams, (err, data) => {
+  dynamodb.query(queryParams, (err, data) => {
     if (err) {
+      console.log("here",err)
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err});
     } else {

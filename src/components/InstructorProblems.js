@@ -7,8 +7,13 @@ import { API } from "aws-amplify"
 function InstructorProblems(){
 
     async function getInstructorProblems(){
+        const myInit = {
+            queryStringParameters: {
+                instructor_email: "josh_hill15@me.com"
+            }
+        }
         try {
-            const res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", {})
+            const res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)
             console.log({res})
         }
         catch(err) {
