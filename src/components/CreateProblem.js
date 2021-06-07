@@ -2,15 +2,29 @@ import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
 import "../styles/createProblem.css"
+import { Storage } from 'aws-amplify'
+
+
+
 function CreateProblem(){
+    
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const [problemName, setProblemName] = useState("")
+
+    // Information needed to write to S3/DynamoDB
+
+    const diagramName = diagram.name;
+    var text;
+    var reader = new FileReader();
     var email;
-    
+    var diagramURL = "https://aws-parallel-diagrams141253-dev.s3.amazonaws.com/public/" + diagramName;
+
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
+
     for (var key in localStorage){
+
         if (key.match(/AuthUser$/g)) {
             email = localStorage.getItem(key)
         }
@@ -19,22 +33,50 @@ function CreateProblem(){
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
-        const instructorSubmission = {
-            problemName,
-            CFFile,
-            diagram,
-            textBoxData: textBoxData.current.value,
-            email
+
+        // LOAD CFFILE TO fileContent
+
+        reader.readAsText(CFFile);
+        reader.onload = async (e) => {
+
+            text = (e.target.result)            
+            console.log(text)
+
         }
-        console.log(instructorSubmission)
+
+        alert(text);
+
+        const instructorSubmission = {
+
+            problemName,
+            diagramName,
+            //fileContent,
+            diagramURL,
+            textBoxData: textBoxData.current.value,
+            email,
+
+        }
+
+        // console.log(instructorSubmission)
 
 
-        // api call 
+        // USING STORAGE TO STORE IMAGE
+
+        // const result = Storage.put(diagramName, diagram)
+        //     .then(res => {
+        //         console.log(res, "SUCCESS")
+        //     }).catch(e => console.log(e))
+        //     console.log("result: ", result)
+
+        // api call
         const apiName = "createProblem"
         const path = "/createProblem"
         const myInit = {
+
             body: instructorSubmission
+
         }
+
         API.post(apiName, path, myInit)
             .then(response => {
                 console.log({response})
@@ -42,10 +84,14 @@ function CreateProblem(){
             .catch(error => {
                 console.log(error.response)
             })
+
         textBoxData.current.value = ""
         setProblemName("")
+
     };
+
     return (
+
         <div className="container">
             <Form >
                 <Form.Group controlId="formBasicEmail">
@@ -69,4 +115,5 @@ function CreateProblem(){
         </div>
     )
 }
+
 export default CreateProblem
