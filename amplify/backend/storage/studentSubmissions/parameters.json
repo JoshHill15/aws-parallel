@@ -1,0 +1,5 @@
+{
+    "tableName": "studentSubmissions",
+    "partitionKeyName": "id",
+    "partitionKeyType": "N"
+}

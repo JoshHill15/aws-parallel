@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/studentSubmissions",
+            "lambdaFunction": "studentSubmissions",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/studentSubmissions"
+        }
+    ],
+    "resourceName": "studentSubmissions",
+    "apiName": "studentSubmissions",
+    "functionArns": [
+        {
+            "lambdaFunction": "studentSubmissions"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+        "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "studentSubmissions",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

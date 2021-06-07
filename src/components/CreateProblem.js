@@ -4,7 +4,7 @@ import { API } from "aws-amplify";
 import { Storage } from 'aws-amplify'
 
 function CreateProblem(){
-    const [fileContent, setfileContent] = useState("")
+    
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -14,6 +14,7 @@ function CreateProblem(){
     // Information needed to write to S3/DynamoDB
     
     const diagramName = diagram.name;
+    var text;
     var reader = new FileReader();
     var email;
     var diagramURL = "https://aws-parallel-diagrams141253-dev.s3.amazonaws.com/public/" + diagramName;
@@ -31,25 +32,27 @@ function CreateProblem(){
         // LOAD CFFILE TO fileContent
         reader.readAsText(CFFile);
         
-        reader.onload = function(e){
-            setfileContent(e.target.result);
+        reader.onload = async (e) => {
+            text = (e.target.result)            
+            console.log(text)
         }
         
-        // console.log(fileContent);
+        alert(text);
         
 
         const instructorSubmission = {
             problemName,
-            fileContent,
+            diagramName,
+            //fileContent,
             diagramURL,
             textBoxData: textBoxData.current.value,
             email,
         }
         
-       
+       // console.log(instructorSubmission)
 
 
-        console.log(instructorSubmission)
+        // console.log(instructorSubmission)
 
         // USING STORAGE TO STORE IMAGE
         // const result = Storage.put(diagramName, diagram)
