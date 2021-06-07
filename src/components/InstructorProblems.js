@@ -56,9 +56,9 @@ function InstructorProblems() {
         }
     }
 
-    // useEffect(() => {
-    //     if (email !== "") getInstructorProblems()
-    // },[email])
+    useEffect(() => {
+        if (email !== "") getInstructorProblems()
+    },[email])
     // useEffect(() => getInstructorProblem(), [])
     useEffect(() => getDiagrams(), [])
 

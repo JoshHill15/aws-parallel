@@ -22,11 +22,7 @@
         },
         "instructorProblems": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
-<<<<<<< HEAD
           "s3Key": "amplify-builds/instructorProblems-3061636344485738544f-build.zip"
-=======
-          "s3Key": "amplify-builds/instructorProblems-3242383173727a33356d-build.zip"
->>>>>>> daae0ba110434942e3c335c13cb90fb831fc4020
         },
         "studentSubmissions": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
