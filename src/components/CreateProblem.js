@@ -34,9 +34,6 @@ function CreateProblem(){
         reader.onload = function(e){
             setfileContent(e.target.result);
         }
-        
-        // console.log(fileContent);
-        
 
         const instructorSubmission = {
             problemName,
@@ -45,9 +42,6 @@ function CreateProblem(){
             textBoxData: textBoxData.current.value,
             email,
         }
-        
-       
-
 
         console.log(instructorSubmission)
 
