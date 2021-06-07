@@ -16,12 +16,20 @@ const awsmobile = {
         },
         {
             "name": "instructorProblems",
+<<<<<<< HEAD
             "endpoint": "https://o1evjpipw9.execute-api.us-east-1.amazonaws.com/dev",
+=======
+            "endpoint": "https://hjre76nigb.execute-api.us-east-1.amazonaws.com/dev",
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
             "region": "us-east-1"
         },
         {
             "name": "studentSubmissions",
+<<<<<<< HEAD
             "endpoint": "https://j3keiowim8.execute-api.us-east-1.amazonaws.com/dev",
+=======
+            "endpoint": "https://owmh0ytcqa.execute-api.us-east-1.amazonaws.com/dev",
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
             "region": "us-east-1"
         }
     ],
@@ -35,7 +43,9 @@ const awsmobile = {
             "tableName": "studentSubmissions-dev",
             "region": "us-east-1"
         }
-    ]
+    ],
+    "aws_user_files_s3_bucket": "aws-parallel-diagrams141253-dev",
+    "aws_user_files_s3_bucket_region": "us-east-1"
 };
 
 

@@ -53,7 +53,11 @@ const convertUrlType = (param, type) => {
       return param;
   }
 }
+<<<<<<< HEAD
 console.log("path: ", path, "hashkeypath", hashKeyPath)
+=======
+console.log("path: ", path, "hashkeypath", hashKeyPath, "sorkeypath", sortKeyPath)
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
 
 /********************************
  * HTTP Get method for list objects *
@@ -97,44 +101,93 @@ app.get(path + hashKeyPath, function(req, res) {
 /*****************************************
  * HTTP Get method for get single object *
  *****************************************/
+<<<<<<< HEAD
 
 app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+=======
+console.log("THIS", path + "/object" + hashKeyPath + sortKeyPath)
+app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+  console.log("if")
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
 
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
+<<<<<<< HEAD
   } else {
     params[partitionKeyName] = req.params[partitionKeyName];
     try {
       params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
     } catch(err) {
       res.statusCode = 500;
+=======
+    console.log("first if", params)
+  } else {
+    params[partitionKeyName] = req.params[partitionKeyName];
+    console.log("first else", params)
+    try {
+      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
+      console.log("try", params)
+    } catch(err) {
+      res.statusCode = 500;
+      console.log("catch")
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
       res.json({error: 'Wrong column type ' + err});
     }
   }
   if (hasSortKey) {
+<<<<<<< HEAD
     try {
       params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
+=======
+    console.log("hi")
+    try {
+      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+      console.log("try")
+    } catch(err) {
+      res.statusCode = 500;
+      res.json({error: 'Wrong column type ' + err});
+      console.log("catch")
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
     }
   }
 
   let getItemParams = {
     TableName: tableName,
+<<<<<<< HEAD
     Key: params
   }
 
   dynamodb.get(getItemParams,(err, data) => {
     if(err) {
+=======
+    Key: {'instructor_email': 'josh_hil15@me.com', 'problemID': 2}
+  }
+
+  console.log("getitemparams", getItemParams)
+
+  dynamodb.get(getItemParams,(err, data) => {
+    if(err) {
+      console.log("dynamo if", err.message)
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err.message});
     } else {
       if (data.Item) {
+<<<<<<< HEAD
         res.json(data.Item);
       } else {
         res.json(data) ;
+=======
+        console.log("dynamo else if")
+        res.json(data.Item);
+      } else {
+        res.json(data) ;
+        console.log("else else dynamo")
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
       }
     }
   });
