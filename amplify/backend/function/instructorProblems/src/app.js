@@ -58,6 +58,33 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
+ console.log("HERE", path + "/scan")
+ app.get(path + "/scan", function(req, res) {
+   console.log("INSIDE")
+   var condition = {}
+   condition[partitionKeyName] = {
+     ComparisonOperator: 'EQ'
+   }
+ 
+   let queryParams = {
+     TableName: tableName,
+     KeyConditions: condition
+   }
+ 
+   console.log("HIII, queryparams",queryParams)
+ 
+   dynamodb.scan(queryParams, (err, data) => {
+     if (err) {
+       res.statusCode = 500;
+       res.json({error: 'Could not load items: ' + err});
+     } else {
+       res.json(data.Items);
+     }
+   });
+ });
+
+ console.log("past")
+
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
@@ -227,6 +254,11 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     }
   });
 });
+
+
+
+
+
 app.listen(3000, function() {
     console.log("App started")
 });
