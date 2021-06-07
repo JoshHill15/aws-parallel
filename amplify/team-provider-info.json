@@ -19,6 +19,25 @@
         "createProblem": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
           "s3Key": "amplify-builds/createProblem-6942616543493851344e-build.zip"
+        },
+        "instructorProblems": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/instructorProblems-3242383173727a33356d-build.zip"
+        },
+        "studentSubmissions": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/studentSubmissions-38304c304d57674f4e2b-build.zip"
+        }
+      },
+      "storage": {
+        "createProblem": {
+          "tableName": "createProblem",
+          "region": "us-east-1",
+          "arn": "arn:aws:dynamodb:us-east-1:430079601105:table/createProblem",
+          "partitionKeyName": "instructor_email",
+          "partitionKeyType": "S",
+          "sortKeyName": "problemID",
+          "sortKeyType": "N"
         }
       }
     }

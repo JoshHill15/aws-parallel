@@ -1,6 +1,6 @@
 {
     "identityPoolName": "awsparallel17452c78_identitypool_17452c78",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "awspar17452c78",
     "userPoolName": "awsparallel17452c78_userpool_17452c78",
     "autoVerifiedAttributes": [

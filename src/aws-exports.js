@@ -13,8 +13,31 @@ const awsmobile = {
             "name": "createProblem",
             "endpoint": "https://s4favscooa.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
+        },
+        {
+            "name": "instructorProblems",
+            "endpoint": "https://hjre76nigb.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        },
+        {
+            "name": "studentSubmissions",
+            "endpoint": "https://owmh0ytcqa.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
         }
-    ]
+    ],
+    "aws_dynamodb_all_tables_region": "us-east-1",
+    "aws_dynamodb_table_schemas": [
+        {
+            "tableName": "createProblem",
+            "region": "us-east-1"
+        },
+        {
+            "tableName": "studentSubmissions-dev",
+            "region": "us-east-1"
+        }
+    ],
+    "aws_user_files_s3_bucket": "aws-parallel-diagrams141253-dev",
+    "aws_user_files_s3_bucket_region": "us-east-1"
 };
 
 
