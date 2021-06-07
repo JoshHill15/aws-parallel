@@ -106,6 +106,13 @@
     "studentSubmissions": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
+<<<<<<< HEAD
+=======
+    },
+    "awsparalleldiagrams": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
     }
   }
 }

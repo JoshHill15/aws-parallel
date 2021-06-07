@@ -11,11 +11,15 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from "react-router-dom";
 
 
+
 //Configure Amplify
 import Amplify from "aws-amplify"
 import config from "./aws-exports"
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac9ad56685deea00dea024d9de8c74a2e5917913
 Amplify.configure(config)
 
 
