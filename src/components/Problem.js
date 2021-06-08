@@ -38,7 +38,6 @@ function Problem(){
         //TODO 
         const apiName = "studentSubmissions"
         const path = "/studentSubmissions"
-        const path = "/studentSubmissions/:id"
         const myInit = {
             body: studentSubmission
         }
