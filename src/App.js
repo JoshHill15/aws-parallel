@@ -56,13 +56,10 @@ const App = () => {
         try {
             let res = await API.get("instructorProblems", "/instructorProblems/scan", {})
             console.log('{ res }', res)
-            // res = await Promise.all(res.map(async cv => {
-            //     const splitDiagramArray = cv.diagram.split("/")
-            //     const key = splitDiagramArray[splitDiagramArray.length - 1]
-            //     console.log("first", splitDiagramArray)
-            //     cv.diagram = await Storage.get(cv.diagram)
-            //     return cv
-            // }))
+            res = await Promise.all(res.map(async cv => {
+                cv.diagram = await Storage.get(cv.diagramName)
+                return cv
+            }))
             setProblems(res)
         }
         catch (err) {

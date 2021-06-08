@@ -58,7 +58,6 @@ const convertUrlType = (param, type) => {
  * HTTP Get method for list objects *
  ********************************/
 
- console.log("HERE", path + "/scan")
  app.get(path + "/scan", function(req, res) {
    console.log("INSIDE")
    var condition = {}
@@ -71,7 +70,6 @@ const convertUrlType = (param, type) => {
      KeyConditions: condition
    }
  
-   console.log("HIII, queryparams",queryParams)
  
    dynamodb.scan(queryParams, (err, data) => {
      if (err) {
@@ -83,7 +81,6 @@ const convertUrlType = (param, type) => {
    });
  });
 
- console.log("past")
 
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
