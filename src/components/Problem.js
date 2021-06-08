@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
 import {v4 as uuidv4} from 'uuid';
-import "../styles/createProblem.css"
 import { Checkbox } from "@material-ui/core";
+
 function Problem(){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
@@ -12,6 +12,7 @@ function Problem(){
     const [problemName, setProblemName] = useState("")
     var email;
     var id = 2;
+
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     for (var key in localStorage){
         if (key.match(/AuthUser$/g)) {
@@ -37,6 +38,7 @@ function Problem(){
         //TODO 
         const apiName = "studentSubmissions"
         const path = "/studentSubmissions"
+        const path = "/studentSubmissions/:id"
         const myInit = {
             body: studentSubmission
         }

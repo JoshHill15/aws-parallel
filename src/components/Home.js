@@ -1,9 +1,7 @@
 import React from "react"
 import "../styles/Home.css"
-
 function Home({ problems }) {
     console.log("[roo", problems)
-
     return (
         <div>
             {problems.map((value, index) => {
@@ -14,7 +12,7 @@ function Home({ problems }) {
                             <p className="problem-description">{value.textBoxData}</p>
                         </div>
                         <div>
-                            <img src={value.diagram} alt="image"/>
+                            <img className="image" src={value.diagram} alt="image"/>
                         </div>
                     </div>
                 )
@@ -22,5 +20,4 @@ function Home({ problems }) {
         </div>
     )
 }
-
 export default Home
