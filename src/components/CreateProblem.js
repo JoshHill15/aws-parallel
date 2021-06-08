@@ -8,36 +8,26 @@ function CreateProblem(){
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const [problemName, setProblemName] = useState("")
-
-
     // Information needed to write to S3/DynamoDB
-    
     const diagramName = diagram.name;
     var reader = new FileReader();
     var email;
     var diagramURL = "https://aws-parallel-diagrams141253-dev.s3.amazonaws.com/public/" + diagramName;
-
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     for (var key in localStorage){
         if (key.match(/AuthUser$/g)) {
             email = localStorage.getItem(key)
         }
     }
-
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
-        
         // LOAD CFFILE TO fileContent
         reader.readAsText(CFFile);
-        
         reader.onload = function(e){
             setfileContent(e.target.result);
         }
-        
         // console.log(fileContent);
-        
-
         const instructorSubmission = {
             problemName,
             fileContent,
@@ -46,22 +36,13 @@ function CreateProblem(){
             textBoxData: textBoxData.current.value,
             email,
         }
-        
-       
-
-
         console.log(instructorSubmission)
-
         // USING STORAGE TO STORE IMAGE
         const result = Storage.put(diagramName, diagram)
             .then(res => {
                 console.log(res, "SUCCESS")
             }).catch(e => console.log(e))
-        
             console.log("result: ", result)
-
-
-
         // api call
         const apiName = "createProblem"
         const path = "/createProblem"

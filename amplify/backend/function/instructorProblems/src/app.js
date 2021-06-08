@@ -5,23 +5,16 @@ Licensed under the Apache License, Version 2.0 (the "License"). You may not use 
 or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and limitations under the License.
 */
-
-
-
 const AWS = require('aws-sdk')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 var bodyParser = require('body-parser')
 var express = require('express')
-
 AWS.config.update({ region: process.env.TABLE_REGION });
-
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
 let tableName = "createProblem";
 // if(process.env.ENV && process.env.ENV !== "NONE") {
 //   tableName = tableName + '-' + process.env.ENV;
 // }
-
 const userIdPresent = false; // TODO: update in case is required to use that definition
 const partitionKeyName = "instructor_email";
 const partitionKeyType = "S";
@@ -36,14 +29,12 @@ const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
 var app = express()
 app.use(bodyParser.json())
 app.use(awsServerlessExpressMiddleware.eventContext())
-
 // Enable CORS for all methods
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Access-Control-Allow-Headers", "*")
   next()
 });
-
 // convert url string param to expected Type
 const convertUrlType = (param, type) => {
   switch(type) {
@@ -53,26 +44,19 @@ const convertUrlType = (param, type) => {
       return param;
   }
 }
-
 /********************************
  * HTTP Get method for list objects *
  ********************************/
-
- console.log("HERE", path + "/scan")
  app.get(path + "/scan", function(req, res) {
    console.log("INSIDE")
    var condition = {}
    condition[partitionKeyName] = {
      ComparisonOperator: 'EQ'
    }
- 
    let queryParams = {
      TableName: tableName,
      KeyConditions: condition
    }
- 
-   console.log("HIII, queryparams",queryParams)
- 
    dynamodb.scan(queryParams, (err, data) => {
      if (err) {
        res.statusCode = 500;
@@ -82,15 +66,11 @@ const convertUrlType = (param, type) => {
      }
    });
  });
-
- console.log("past")
-
 app.get(path + hashKeyPath, function(req, res) {
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
   }
-
   if (userIdPresent && req.apiGateway) {
     condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
   } else {
@@ -101,15 +81,12 @@ app.get(path + hashKeyPath, function(req, res) {
       res.json({error: 'Wrong column type ' + err});
     }
   }
-
   let queryParams = {
     TableName: tableName,
     KeyConditions: condition
   }
-
   // console.log("queryparams",queryParams)
   // console.log("keyconditions", queryParams.KeyConditions.instructor_email.AttributeValueList)
-
   dynamodb.query(queryParams, (err, data) => {
     if (err) {
       res.statusCode = 500;
@@ -119,7 +96,6 @@ app.get(path + hashKeyPath, function(req, res) {
     }
   });
 });
-
 /*****************************************
  * HTTP Get method for get single object *
  *****************************************/
@@ -144,14 +120,11 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
       res.json({error: 'Wrong column type ' + err});
     }
   }
-
   let getItemParams = {
     TableName: tableName,
     Key: params
   }
-
   // console.log("getitemparams", getItemParams)
-
   dynamodb.get(getItemParams,(err, data) => {
     if(err) {
       res.statusCode = 500;
@@ -165,18 +138,13 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     }
   });
 });
-
-
 /************************************
 * HTTP put method for insert object *
 *************************************/
-
 app.put(path, function(req, res) {
-
   if (userIdPresent) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
-
   let putItemParams = {
     TableName: tableName,
     Item: req.body
@@ -190,17 +158,13 @@ app.put(path, function(req, res) {
     }
   });
 });
-
 /************************************
 * HTTP post method for insert object *
 *************************************/
-
 app.post(path, function(req, res) {
-
   if (userIdPresent) {
     req.body['userId'] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   }
-
   let putItemParams = {
     TableName: tableName,
     Item: req.body
@@ -214,11 +178,9 @@ app.post(path, function(req, res) {
     }
   });
 });
-
 /**************************************
 * HTTP remove method to delete object *
 ***************************************/
-
 app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
   var params = {};
   if (userIdPresent && req.apiGateway) {
@@ -240,7 +202,6 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
       res.json({error: 'Wrong column type ' + err});
     }
   }
-
   let removeItemParams = {
     TableName: tableName,
     Key: params
@@ -254,15 +215,9 @@ app.delete(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     }
   });
 });
-
-
-
-
-
 app.listen(3000, function() {
     console.log("App started")
 });
-
 // Export the app object. When executing the application local this does nothing. However,
 // to port it to AWS Lambda we will create a wrapper around that will load the app from
 // this file
