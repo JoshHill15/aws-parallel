@@ -21,14 +21,12 @@ function InstructorProblems() {
         try {
             let count = 1
             let res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)
-            console.log("instructor", res)
             res = await Promise.all(res.map(async cv => {
                 cv.id = count++
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
             setRows(res)
-            console.log("instructorwwww", res)
         }
         catch(err) {
             console.error("err: ", err)
@@ -54,7 +52,9 @@ function InstructorProblems() {
     useEffect(() => {
         if (email !== "") getInstructorProblems()
     },[email])
-    useEffect(() => getInstructorProblem(), [])
+    useEffect(() => {
+        if (email !== "") getInstructorProblem()
+    }, [email])
 
 
     const columns = [
