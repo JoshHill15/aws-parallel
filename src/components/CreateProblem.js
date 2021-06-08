@@ -35,8 +35,6 @@ function CreateProblem(){
             setfileContent(e.target.result);
         }
         
-        // console.log(fileContent);
-        
 
         const instructorSubmission = {
             problemName,
@@ -47,15 +45,10 @@ function CreateProblem(){
             email,
         }
         
-       
-
-
-        console.log(instructorSubmission)
 
         // USING STORAGE TO STORE IMAGE
-        const result = Storage.put(diagramName, diagram)
+        Storage.put(diagramName, diagram)
             .then(res => {
-                console.log(res, "SUCCESS")
             }).catch(e => console.log(e))
         // api call
         const apiName = "createProblem"
@@ -70,11 +63,13 @@ function CreateProblem(){
             .catch(error => {
                 console.log(error.response)
             })
-        textBoxData.current.value = ""
-        setProblemName("")
+        // textBoxData.current.value = ""
+        // setProblemName("")
     };
+
     return (
         <div className="container">
+            <h1 className="create-problem-title">Create Problem</h1>
             <Form >
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Problem Name</Form.Label>

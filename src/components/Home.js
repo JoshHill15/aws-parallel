@@ -8,8 +8,8 @@ function Home({ problems }) {
                 return (
                     <div key={index} className="container-home">
                         <div className="left">
-                            <p className="problem-name">{value.problemName}</p>
-                            <p className="problem-description">{value.textBoxData}</p>
+                            <h1 className="problem-name">{value.problemName}</h1>
+                            <h3 className="problem-description">{value.textBoxData}</h3>
                         </div>
                         <div>
                             <img className="image" src={value.diagram} alt="image"/>
