@@ -1,5 +1,7 @@
 import React from "react"
 import "../styles/Home.css"
+import Button from 'react-bootstrap/Button'
+
 function Home({ problems }) {
     console.log("[roo", problems)
     return (
@@ -13,6 +15,9 @@ function Home({ problems }) {
                         </div>
                         <div>
                             <img className="image" src={value.diagram} alt="image"/>
+                        </div>
+                        <div>
+                            <Button variant="primary">View</Button>
                         </div>
                     </div>
                 )

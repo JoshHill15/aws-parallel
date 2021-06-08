@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
-import { API } from "aws-amplify"
+import { API, Storage } from "aws-amplify"
+import Image from 'react-bootstrap/Image';
 import {v4 as uuidv4} from 'uuid';
 import { Checkbox } from "@material-ui/core";
 
@@ -31,11 +32,43 @@ function Problem(){
             email
         }
         console.log(studentSubmission)
+        async function getInstructorProblem() {
+            const myInit = {
+                queryStringParameters: {
+                    instructor_email: "josh_hill15@me.com",
+                    problemID: 2
+                }
+            }
+            try {
+                const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
+                console.log({ result })
+            }
+            catch (err) {
+                console.error("err: ", err)
+            }
+        }
+        // async function getProblem() {
+        //     try {
+        //         let res = await API.get("instructorProblems", "/instructorProblems/query", {})
+        //         console.log('{ res }', res)
+        //         res = await Promise.all(res.map(async cv => {
+        //             cv.diagram = await Storage.get(cv.diagramName)
+        //             return cv
+        //         }))
+        //         setProblems(res)
+        //     }
+        //     catch (err) {
+        //         console.error("err: ", err)
+    
+        //     }
+        // }
 
        // console.log(instructorSubmission)
 
         // api call
         //TODO 
+        const instructorApiName = "instructorProblems"
+        const instructorPath = "instructorProblems/"
         const apiName = "studentSubmissions"
         const path = "/studentSubmissions"
         const myInit = {
@@ -58,12 +91,18 @@ function Problem(){
                     {/* <Form.Label>Problem Name</Form.Label>
                     <Form.Control size='lg' value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" /> */}
                 </Form.Group>
+                <Form.Group>
+                    <Form.Label>Scenario: </Form.Label>
+                    <Form.Control type="text" placeholder="This is where the problem scenario will go."></Form.Control>
+                    <Image src="" />
+                    <Image src="" />
+                </Form.Group>
                 <Form.Group className="upload-fields">
                     <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
-                    <Form.Control ref={textBoxData} as="textarea" rows={6} />
+                    <Form.Control ref={textBoxData} as="textarea" rows={3} />
                     <Form.Check ref={checkBoxData} type="checkbox" label="Request Manual Feedback" />
                 </Form.Group>
                 <Form.Group>
