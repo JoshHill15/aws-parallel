@@ -20,10 +20,12 @@ const App = () => {
     const [problems, setProblems] = useState([])
 
     async function getProblems() {
+        //scan table createProblem
         try {
             let res = await API.get("instructorProblems", "/instructorProblems/scan", {})
             console.log('{ res }', res)
             res = await Promise.all(res.map(async cv => {
+                // create signed URLS
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
