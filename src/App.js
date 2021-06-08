@@ -4,7 +4,7 @@ import Login from "./components/Login"
 import { Route, useHistory } from "react-router-dom";
 import "./App.css";
 import InstructorProblems from './components/InstructorProblems';
-import { Auth, Hub, Logger } from "aws-amplify"
+import { Auth, Hub, Logger, API, Storage } from "aws-amplify"
 import decode from "jwt-decode"
 import InstructorHeader from "./components/InstructorHeader"
 import StudentHeader from "./components/StudentHeader"
@@ -17,6 +17,7 @@ import Problem from './components/Problem';
 const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
+    const [problems, setProblems] = useState([])
     // const [isAuthenticating, setIsAuthenticating] = useState(true);
     // const [isAuthenticated, userHasAuthenticated] = useState(false);
 
@@ -38,6 +39,38 @@ const App = () => {
     //     setIsAuthenticating(false);
     //   }
 
+    // async function getDiagrams() {
+    //     // grab s3 image keys
+    //     let imageKeys = await Storage.list("")
+    //     console.log(imageKeys, "1")
+    //     // turn them into signed urls
+    //     imageKeys = await Promise.all(imageKeys.map(async k => {
+    //         const signedURL = await Storage.get(k.key)
+    //         return signedURL
+    //     }))
+    //     console.log("2", imageKeys)
+    //     setImages(imageKeys)
+    // }
+
+    async function getProblems() {
+        try {
+            let res = await API.get("instructorProblems", "/instructorProblems/scan", {})
+            console.log('{ res }', res)
+            // res = await Promise.all(res.map(async cv => {
+            //     const splitDiagramArray = cv.diagram.split("/")
+            //     const key = splitDiagramArray[splitDiagramArray.length - 1]
+            //     console.log("first", splitDiagramArray)
+            //     cv.diagram = await Storage.get(cv.diagram)
+            //     return cv
+            // }))
+            setProblems(res)
+        }
+        catch (err) {
+            console.error("err: ", err)
+
+        }
+    }
+
     function getUserGroup() {
         // Extract group information from JWT
         Auth.currentSession().then(res => {
@@ -54,6 +87,10 @@ const App = () => {
     useEffect(() => {
         getUserGroup()
     }, [userGroup])
+
+    useEffect(() => {
+        getProblems()
+    }, [])
 
     function routeToCorrectHeader() {
         if (userGroup === "Instructors") return <InstructorHeader />
@@ -113,7 +150,7 @@ const App = () => {
         <div>
             {routeToCorrectHeader()}
             <Route exact={true} path="/" component={Login} />
-            <Route exact={true} path="/home" component={Home} />
+            <Route exact={true} path="/home" render={(props) => <Home {...props} problems={problems} />} />
             <Route exact={true} path="/problems" component={InstructorProblems} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
             <Route exact={true} path="/studentproblems" component={StudentProblems} />
