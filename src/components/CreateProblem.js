@@ -57,11 +57,6 @@ function CreateProblem(){
             .then(res => {
                 console.log(res, "SUCCESS")
             }).catch(e => console.log(e))
-        
-            console.log("result: ", result)
-
-
-
         // api call
         const apiName = "createProblem"
         const path = "/createProblem"

@@ -59,6 +59,7 @@ const convertUrlType = (param, type) => {
  ********************************/
 
  app.get(path + "/scan", function(req, res) {
+   console.log("INSIDE")
    var condition = {}
    condition[partitionKeyName] = {
      ComparisonOperator: 'EQ'

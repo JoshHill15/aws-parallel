@@ -18,7 +18,7 @@ const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
-
+   
     async function getProblems() {
         //scan table createProblem
         try {
@@ -45,7 +45,7 @@ const App = () => {
             const group = decodedToken["cognito:groups"][0]
             localStorage.setItem("userGroup", group)
             setUserGroup(group)
-
+    
         })
             .catch(err => console.log(err))
     }
@@ -63,7 +63,7 @@ const App = () => {
         if (userGroup === "Students") return <StudentHeader />
         else return null
     }
-
+    
     const logger = new Logger('My-Logger');
 
     const listener = (data) => {

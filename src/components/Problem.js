@@ -1,14 +1,18 @@
 import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
-import "../styles/createProblem.css"
+import {v4 as uuidv4} from 'uuid';
+import { Checkbox } from "@material-ui/core";
+
 function Problem(){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
+    const checkBoxData = useRef()
     const [problemName, setProblemName] = useState("")
     var email;
-    
+    var id = 2;
+
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     for (var key in localStorage){
         if (key.match(/AuthUser$/g)) {
@@ -22,6 +26,8 @@ function Problem(){
         const studentSubmission = {
             CFFile,
             textBoxData: textBoxData.current.value,
+            checkBoxData: checkBoxData.current.value,
+            id,
             email
         }
         console.log(studentSubmission)
@@ -31,7 +37,7 @@ function Problem(){
         // api call
         //TODO 
         const apiName = "studentSubmissions"
-        const path = "/studentSubmissions/:id"
+        const path = "/studentSubmissions"
         const myInit = {
             body: studentSubmission
         }
@@ -58,6 +64,7 @@ function Problem(){
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={6} />
+                    <Form.Check ref={checkBoxData} type="checkbox" label="Request Manual Feedback" />
                 </Form.Group>
                 <Form.Group>
                     <button className="submit" onClick={handleSubmit}>

@@ -1,9 +1,7 @@
 import React from "react"
 import "../styles/Home.css"
-
 function Home({ problems }) {
     console.log("[roo", problems)
-
     return (
         <div>
             {problems.map((value, index) => {
@@ -22,5 +20,4 @@ function Home({ problems }) {
         </div>
     )
 }
-
 export default Home
