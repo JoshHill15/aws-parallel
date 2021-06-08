@@ -18,39 +18,6 @@ const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
-    // const [isAuthenticating, setIsAuthenticating] = useState(true);
-    // const [isAuthenticated, userHasAuthenticated] = useState(false);
-
-    // useEffect(() => {
-    //     onload();
-    // }, []);
-
-    // async function onLoad() {
-    //     try {
-    //       await Auth.currentSession();
-    //       userHasAuthenticated(true);
-    //     }
-    //     catch(e) {
-    //       if (e !== 'No current user') {
-    //         alert(e);
-    //       }
-    //     }
-
-    //     setIsAuthenticating(false);
-    //   }
-
-    // async function getDiagrams() {
-    //     // grab s3 image keys
-    //     let imageKeys = await Storage.list("")
-    //     console.log(imageKeys, "1")
-    //     // turn them into signed urls
-    //     imageKeys = await Promise.all(imageKeys.map(async k => {
-    //         const signedURL = await Storage.get(k.key)
-    //         return signedURL
-    //     }))
-    //     console.log("2", imageKeys)
-    //     setImages(imageKeys)
-    // }
 
     async function getProblems() {
         try {

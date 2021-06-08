@@ -59,7 +59,6 @@ const convertUrlType = (param, type) => {
  ********************************/
 
  app.get(path + "/scan", function(req, res) {
-   console.log("INSIDE")
    var condition = {}
    condition[partitionKeyName] = {
      ComparisonOperator: 'EQ'
@@ -103,9 +102,6 @@ app.get(path + hashKeyPath, function(req, res) {
     TableName: tableName,
     KeyConditions: condition
   }
-
-  // console.log("queryparams",queryParams)
-  // console.log("keyconditions", queryParams.KeyConditions.instructor_email.AttributeValueList)
 
   dynamodb.query(queryParams, (err, data) => {
     if (err) {

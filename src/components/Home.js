@@ -14,7 +14,7 @@ function Home({ problems }) {
                             <p className="problem-description">{value.textBoxData}</p>
                         </div>
                         <div>
-                            <img src={value.diagram} alt="image"/>
+                            <img className="image" src={value.diagram} alt="image"/>
                         </div>
                     </div>
                 )

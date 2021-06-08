@@ -8,7 +8,6 @@
 }
 
 .left {
-    border: 2px solid green;
     height: 100%;
     width:600px;
 }
@@ -24,7 +23,6 @@
 }
 
 .image {
-    border: 2px solid blue;
-    height: 300px;
-    width:400px;
+    height: 100%;
+    width:600px;
 }
