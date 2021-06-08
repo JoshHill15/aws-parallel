@@ -39,12 +39,12 @@ function InstructorProblems() {
         const myInit = {
             queryStringParameters: {
                 instructor_email: email,
-                problemID: 2
+                problemID: 3
             }
         }
         try {
             const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-            console.log({ result })
+            console.log("look here", result)
         }
         catch (err) {
             console.error("err: ", err)
@@ -54,7 +54,7 @@ function InstructorProblems() {
     useEffect(() => {
         if (email !== "") getInstructorProblems()
     },[email])
-    // useEffect(() => getInstructorProblem(), [])
+    useEffect(() => getInstructorProblem(), [])
 
 
     const columns = [
