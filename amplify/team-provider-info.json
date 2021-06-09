@@ -22,12 +22,15 @@
         },
         "instructorProblems": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
-          "s3Key": "amplify-builds/instructorProblems-3061636344485738544f-build.zip"
-
+          "s3Key": "amplify-builds/instructorProblems-3651786335346c784c70-build.zip"
         },
         "studentSubmissions": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
           "s3Key": "amplify-builds/studentSubmissions-38304c304d57674f4e2b-build.zip"
+        },
+        "studentProblems": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/studentProblems-736e796f413863665867-build.zip"
         }
       },
       "storage": {

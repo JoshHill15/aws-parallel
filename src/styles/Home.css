@@ -1,14 +1,14 @@
 .container-home {
-    border: 2px solid orange;
     display: flex;
     width: 80%;
     margin-top:3%;
     height: 250px;
     margin-left: 10%;
+    background: #FDECD8;
+    border-radius: 30px;
 }
 
 .left {
-    border: 2px solid green;
     height: 100%;
     width:600px;
 }
@@ -24,7 +24,7 @@
 }
 
 .image {
-    border: 2px solid blue;
     height: 100%;
     width:600px;
+    border-radius: 30px;
 }
