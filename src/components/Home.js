@@ -1,5 +1,8 @@
 import React from "react"
 import "../styles/Home.css"
+import { Link } from "react-router-dom";
+import Button from 'react-bootstrap/Button'
+
 function Home({ problems }) {
     console.log("[roo", problems)
     return (
@@ -13,6 +16,16 @@ function Home({ problems }) {
                         </div>
                         <div>
                             <img className="image" src={value.diagram} alt="image"/>
+                        </div> &nbsp;&nbsp;
+                        <div>
+                            <Link 
+                            to={{
+                                pathname: `/problem/${value.problemID}`,
+                                state: { value : value }
+                            }}
+                            >
+                                <Button variant="primary">View</Button>
+                            </Link>
                         </div>
                     </div>
                 )
