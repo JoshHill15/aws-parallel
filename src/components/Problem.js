@@ -2,8 +2,10 @@ import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
+import { Row, Col, Container } from 'react-bootstrap';
 import {v4 as uuidv4} from 'uuid';
 import { Checkbox } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 function Problem(){
     const [CFFile, setCFFile] = useState("")
@@ -13,6 +15,8 @@ function Problem(){
     const [problemName, setProblemName] = useState("")
     var email;
     var id = 2;
+    const { state } = useLocation();
+    console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     for (var key in localStorage){
@@ -32,21 +36,22 @@ function Problem(){
             email
         }
         console.log(studentSubmission)
-        async function getInstructorProblem() {
-            const myInit = {
-                queryStringParameters: {
-                    instructor_email: "josh_hill15@me.com",
-                    problemID: 2
-                }
-            }
-            try {
-                const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-                console.log({ result })
-            }
-            catch (err) {
-                console.error("err: ", err)
-            }
-        }
+        // async function getInstructorProblem() {
+        //     const myInit = {
+        //         queryStringParameters: {
+        //             instructor_email: "josh_hill15@me.com",
+        //             problemID: 2
+        //         }
+        //     }
+        //     try {
+        //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
+        //         console.log("This is the result: ")
+        //         console.log({ result })
+        //     }
+        //     catch (err) {
+        //         console.error("err: ", err)
+        //     }
+        // }
         // async function getProblem() {
         //     try {
         //         let res = await API.get("instructorProblems", "/instructorProblems/query", {})
@@ -93,9 +98,15 @@ function Problem(){
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Scenario: </Form.Label>
-                    <Form.Control type="text" placeholder="This is where the problem scenario will go."></Form.Control>
-                    <Image src="" />
-                    <Image src="" />
+                    <Form.Control plaintext readOnly defaultValue={state.value.problemName}></Form.Control>
+                    <Form.Control plaintext readOnly defaultValue={state.value.textBoxData} ></Form.Control>
+                    <Container>
+                        <Row>
+                            <Col xs={6} md={4}>
+                    <Image src={state.value.diagram} fluid rounded alt="image" />
+                    </Col>
+                    </Row>
+                    </Container>
                 </Form.Group>
                 <Form.Group className="upload-fields">
                     <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
