@@ -10,7 +10,7 @@ import InstructorHeader from "./components/InstructorHeader"
 import StudentHeader from "./components/StudentHeader"
 import CreateProblem from './components/CreateProblem';
 import StudentProblems from './components/StudentProblems';
-import InstructorsStudents from './components/InstructorsStudent';
+import InstructorsStudents from './components/InstructorsStudents';
 import MyAccount from './components/MyAccount';
 import Problem from './components/Problem';
 
