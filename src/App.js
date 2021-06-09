@@ -10,7 +10,7 @@ import InstructorHeader from "./components/InstructorHeader"
 import StudentHeader from "./components/StudentHeader"
 import CreateProblem from './components/CreateProblem';
 import StudentProblems from './components/StudentProblems';
-import InstructorsStudents from './components/InstructorsStudent';
+import InstructorsStudents from './components/InstructorsStudents';
 import MyAccount from './components/MyAccount';
 import Problem from './components/Problem';
 
@@ -20,10 +20,11 @@ const App = () => {
     const [problems, setProblems] = useState([])
    
     async function getProblems() {
+        //scan table createProblem
         try {
             let res = await API.get("instructorProblems", "/instructorProblems/scan", {})
-            console.log('{ res }', res)
             res = await Promise.all(res.map(async cv => {
+                // create signed URLS
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
@@ -81,7 +82,6 @@ const App = () => {
                 const g = localStorage.getItem("userGroup")
                 localStorage.setItem("total-problems", 0)
                 setUserGroup(g)
-                history.push("/home")
 
                 break;
             case 'signOut':

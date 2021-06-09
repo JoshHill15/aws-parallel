@@ -20,3 +20,8 @@
 .submit:hover {
     color: #FFE6C1;
 }
+
+.create-problem-title{
+    margin-left: 35%;
+    margin-bottom: 3%;
+}

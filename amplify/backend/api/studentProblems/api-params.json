@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/studentProblems",
+            "lambdaFunction": "studentProblems",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/studentProblems"
+        }
+    ],
+    "resourceName": "studentProblems",
+    "apiName": "studentProblems",
+    "functionArns": [
+        {
+            "lambdaFunction": "studentProblems"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+        "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "studentProblems",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
