@@ -23,6 +23,11 @@ const awsmobile = {
             "name": "studentSubmissions",
             "endpoint": "https://owmh0ytcqa.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
+        },
+        {
+            "name": "studentProblems",
+            "endpoint": "https://lct4f5nwaa.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
         }
     ],
     "aws_dynamodb_all_tables_region": "us-east-1",
@@ -33,6 +38,10 @@ const awsmobile = {
         },
         {
             "tableName": "studentSubmissions-dev",
+            "region": "us-east-1"
+        },
+        {
+            "tableName": "studentProblems-dev",
             "region": "us-east-1"
         }
     ],

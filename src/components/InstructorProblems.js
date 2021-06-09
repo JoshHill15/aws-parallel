@@ -17,7 +17,7 @@ function InstructorProblems() {
             queryStringParameters: {
                 instructor_email: email
             }
-        }
+        } 
         try {
             let count = 1
             let res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)

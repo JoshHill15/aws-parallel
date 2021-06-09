@@ -42,6 +42,25 @@
           }
         }
       ]
+    },
+    "studentProblems": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "studentProblems",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
     }
   },
   "auth": {
@@ -94,6 +113,20 @@
           ]
         }
       ]
+    },
+    "studentProblems": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "studentProblems",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "storage": {
@@ -106,10 +139,13 @@
     "studentSubmissions": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
-
     },
     "awsparalleldiagrams": {
       "service": "S3",
+      "providerPlugin": "awscloudformation"
+    },
+    "studentProblems": {
+      "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }
   }
