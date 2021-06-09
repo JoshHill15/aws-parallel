@@ -15,7 +15,7 @@ function Home({ problems }) {
                         </div>
                         <div>
                             <img className="image" src={value.diagram} alt="image"/>
-                        </div>
+                        </div> &nbsp;&nbsp;
                         <div>
                             <Button variant="primary">View</Button>
                         </div>
