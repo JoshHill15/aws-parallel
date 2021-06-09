@@ -82,7 +82,6 @@ const App = () => {
                 const g = localStorage.getItem("userGroup")
                 localStorage.setItem("total-problems", 0)
                 setUserGroup(g)
-                history.push("/home")
 
                 break;
             case 'signOut':
