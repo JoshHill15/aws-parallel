@@ -102,7 +102,7 @@ function Problem(){
                     <Form.Control plaintext readOnly defaultValue={state.value.textBoxData} ></Form.Control>
                     <Container>
                         <Row>
-                            <Col xs={6} md={4}>
+                            <Col xs={6} md={8}>
                     <Image src={state.value.diagram} fluid rounded alt="image" />
                     </Col>
                     </Row>
