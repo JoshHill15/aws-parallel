@@ -68,17 +68,6 @@ function InstructorProblems() {
         }
     ];
 
-    // const rows = [
-    //     { id: 1, problemName: 'first prob', problemDescription: 'desc', diagram: <img src={images[0]} style={{ height: 200, width: 200 }} /> },
-    //     { id: 2, problemName: 'Lannister', problemDescription: 'Cersei', diagram: <a href={images[0]}>link</a> },
-    //     { id: 3, problemName: 'Lannister', problemDescription: 'Jaime', diagram: 45, other: images[0] },
-    //     { id: 4, problemName: 'Stark', problemDescription: 'Arya', diagram: 16 },
-    //     { id: 5, problemName: 'Targaryen', problemDescription: 'Daenerys', diagram: null },
-    //     { id: 6, problemName: 'Melisandre', problemDescription: null, diagram: 150 },
-    //     { id: 7, problemName: 'Clifford', problemDescription: 'Ferrara', diagram: 44 },
-    //     { id: 8, problemName: 'Frances', problemDescription: 'Rossini', diagram: 36 },
-    //     { id: 9, problemName: 'Roxie', problemDescription: 'Harvey', diagram: 65 },
-    // ];
     return (
         <div>
             <div className="createProblemContainer">
@@ -86,7 +75,7 @@ function InstructorProblems() {
                     <button className="createProblem">Create Problem</button>
                 </Link>
             </div>
-            <div style={{ height: 550, width: '90%', marginLeft: "5%" }}>
+            <div style={{ height: 650, width: '90%', marginLeft: "5%" }}>
                 <DataGrid rowHeight={100} rows={rows} columns={columns} pageSize={8} checkboxSelection={false} />
             </div>
         </div>

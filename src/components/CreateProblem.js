@@ -64,8 +64,8 @@ function CreateProblem(){
             .catch(error => {
                 console.log(error.response)
             })
-        // textBoxData.current.value = ""
-        // setProblemName("")
+        textBoxData.current.value = ""
+        setProblemName("")
     };
 
     return (
