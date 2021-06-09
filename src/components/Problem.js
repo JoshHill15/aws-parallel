@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
-function Problem(){
+function Problem( {userGroup} ){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -109,19 +109,25 @@ function Problem(){
                     </Row>
                     </Container>
                 </Form.Group>
-                <Form.Group className="upload-fields">
+                {{ userGroup } != "Students" &&
+                    <Form.Group className="upload-fields">
                     <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
                 </Form.Group>
+                }
+                {{ userGroup } !== "Students" &&
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={3} />
                     <Form.Check ref={checkBoxData} type="checkbox" label="Request Manual Feedback" />
                 </Form.Group>
+                }
+                {{ userGroup } !== "Students" &&
                 <Form.Group>
                     <button className="submit" onClick={handleSubmit}>
                         Submit
                     </button>
                 </Form.Group>
+                }
             </Form>
         </div>
     )

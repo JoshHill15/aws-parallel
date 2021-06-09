@@ -120,7 +120,7 @@ const App = () => {
             <Route exact={true} path="/studentproblems" component={StudentProblems} />
             <Route exact={true} path="/students" component={InstructorsStudents} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
-            <Route exact={true} path="/problem/:id" component={Problem} />
+            <Route exact={true} path="/problem/:id" render={(props) => <Problem {...props} userGroup={ userGroup } />} />
         </div>
     );
 };
