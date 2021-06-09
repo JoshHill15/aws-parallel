@@ -118,6 +118,7 @@ app.get(path + hashKeyPath, function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
+  console.log("inside")
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -144,10 +145,11 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     Key: params
   }
 
-  // console.log("getitemparams", getItemParams)
+  console.log("getitemparams", getItemParams)
 
   dynamodb.get(getItemParams,(err, data) => {
     if(err) {
+      console.log("noooo", err)
       res.statusCode = 500;
       res.json({error: 'Could not load items: ' + err.message});
     } else {
