@@ -1,31 +1,8 @@
-import React, { useEffect, useState } from "react"
-// import Table from 'react-bootstrap/Table';
-import * as ReactBootStrap from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react"
 import { DataGrid } from '@material-ui/data-grid';
-import { API, Auth } from "aws-amplify"
 
 function StudentProblems() {
-    const [email, setEmail] = useState("")
 
-    Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
-        .catch(err => console.log(err))
-
-
-    async function getStudentProblems() {
-        const myInit = {
-            queryStringParameters: {
-                instructor_email: email
-            }
-        }
-        try {
-            const res = await API.get("studentProblems", "/studentProblems/:instructor_email", myInit)
-        } catch (e) {
-            console.log("errrr", e)
-        }
-
-    }
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 350 },
@@ -39,7 +16,6 @@ function StudentProblems() {
         { id: '3', name: "Setup DynamoDB", date: "07/21/2021", status: "Completed" }
     ]
 
-    useEffect(() => getStudentProblems(), [])
 
     return (
         <div>
