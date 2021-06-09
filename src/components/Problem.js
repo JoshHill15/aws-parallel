@@ -14,16 +14,16 @@ function Problem(){
     const checkBoxData = useRef()
     const [problemName, setProblemName] = useState("")
     var email;
-    var id = 2;
+    var id = 9;
     const { state } = useLocation();
     console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
-    for (var key in localStorage){
-        if (key.match(/AuthUser$/g)) {
-            email = localStorage.getItem(key)
-        }
-    }
+    // for (var key in localStorage){
+    //     if (key.match(/AuthUser$/g)) {
+    //         email = localStorage.getItem(key)
+    //     }
+    // }
 
     const handleSubmit = e => {
         //submit fields to lambda function
@@ -32,8 +32,9 @@ function Problem(){
             CFFile,
             textBoxData: textBoxData.current.value,
             checkBoxData: checkBoxData.current.value,
+            problemName: state.value.problemName,
             id,
-            email
+            instructorEmail: state.value.instructor_email
         }
         console.log(studentSubmission)
         // async function getInstructorProblem() {
@@ -102,7 +103,7 @@ function Problem(){
                     <Form.Control plaintext readOnly defaultValue={state.value.textBoxData} ></Form.Control>
                     <Container>
                         <Row>
-                            <Col xs={6} md={4}>
+                            <Col xs={6} md={8}>
                     <Image src={state.value.diagram} fluid rounded alt="image" />
                     </Col>
                     </Row>
