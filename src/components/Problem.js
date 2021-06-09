@@ -7,13 +7,12 @@ import {v4 as uuidv4} from 'uuid';
 import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
-function Problem(){
+function Problem({ email }){
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const checkBoxData = useRef()
     const [problemName, setProblemName] = useState("")
-    var email;
     var id = 9;
     const { state } = useLocation();
     console.log( {state} );
@@ -37,39 +36,15 @@ function Problem(){
             instructorEmail: state.value.instructor_email
         }
         console.log(studentSubmission)
-        // async function getInstructorProblem() {
-        //     const myInit = {
-        //         queryStringParameters: {
-        //             instructor_email: "josh_hill15@me.com",
-        //             problemID: 2
-        //         }
-        //     }
-        //     try {
-        //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-        //         console.log("This is the result: ")
-        //         console.log({ result })
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-        //     }
-        // }
-        // async function getProblem() {
-        //     try {
-        //         let res = await API.get("instructorProblems", "/instructorProblems/query", {})
-        //         console.log('{ res }', res)
-        //         res = await Promise.all(res.map(async cv => {
-        //             cv.diagram = await Storage.get(cv.diagramName)
-        //             return cv
-        //         }))
-        //         setProblems(res)
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-    
-        //     }
-        // }
+        
+        const submissionForInstructor = {
+            submission: CFFile,
+            instructor_email: state.value.instructor_email,
+            grade: "N/A",
+            instructorReview: checkBoxData.current.value,
+            studentsName: email
 
-       // console.log(instructorSubmission)
+        }
 
         // api call
         //TODO 

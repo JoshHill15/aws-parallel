@@ -2,15 +2,10 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
-import { API, Auth, Storage } from "aws-amplify"
+import { API, Storage } from "aws-amplify"
 
-function InstructorProblems() {
-    const [email, setEmail] = useState("")
+function InstructorProblems({ email }) {
     const [rows, setRows] = useState([])
-
-    Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
-        .catch(err => console.log(err))
 
     async function getInstructorProblems(){
         const myInit = {
@@ -52,9 +47,9 @@ function InstructorProblems() {
     useEffect(() => {
         if (email !== "") getInstructorProblems()
     },[email])
-    useEffect(() => {
-        if (email !== "") getInstructorProblem()
-    }, [email])
+    // useEffect(() => {
+    //     if (email !== "") getInstructorProblem()
+    // }, [email])
 
 
     const columns = [

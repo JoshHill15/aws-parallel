@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Button from 'react-bootstrap/Button'
 
 function Home({ problems }) {
-    console.log("[roo", problems)
+    
     return (
         <div>
             {problems.map((value, index) => {
@@ -15,7 +15,7 @@ function Home({ problems }) {
                             <h3 className="problem-description">{value.textBoxData}</h3>
                         </div>
                         <div>
-                            <img className="image" src={value.diagram} alt="image"/>
+                            <img className="image" src={value.diagram} alt="alternate"/>
                         </div> &nbsp;&nbsp;
                         <div>
                             <Link 

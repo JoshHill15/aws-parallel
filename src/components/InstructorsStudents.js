@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { DataGrid } from '@material-ui/data-grid';
-import { API, Auth } from "aws-amplify"
+import { API } from "aws-amplify"
+import { propTypes } from "react-bootstrap/esm/Image";
 
 
-function InstructorsStudents(){
-    const [email, setEmail] = useState("")
+function InstructorsStudents({ email }){
     const [rows, setRows] = useState([])
-
-    Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
-        .catch(err => console.log(err))
 
     async function getStudentProblems() {
         const myInit = {
