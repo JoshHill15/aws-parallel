@@ -11,7 +11,7 @@ function Problem({ email }) {
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
-    const checkBoxData = useRef()
+    const [checkBoxData, setCheckBoxData] = useState(false)
     const [problemName, setProblemName] = useState("")
     var id = 9;
     const { state } = useLocation();
@@ -29,18 +29,18 @@ function Problem({ email }) {
         const studentSubmission = {
             CFFile,
             textBoxData: textBoxData.current.value,
-            checkBoxData: checkBoxData.current.value,
+            checkBoxData,
             problemName: state.value.problemName,
             id,
             instructorEmail: state.value.instructor_email
         }
-        // console.log(studentSubmission)
+        console.log(studentSubmission)
 
         const submissionForInstructor = {
             submission: CFFile,
             instructor_email: state.value.instructor_email,
             grade: "N/A",
-            instructorReview: checkBoxData.current.value,
+            // instructorReview: checkBoxData.current.value,
             studentsName: email,
             problemName: state.value.problemName
 
@@ -102,7 +102,7 @@ function Problem({ email }) {
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={3} />
-                    <Form.Check ref={checkBoxData} type="checkbox" label="Request Manual Feedback" />
+                    <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Manual Feedback" />
                 </Form.Group>
                 <Form.Group>
                     <button className="submit" onClick={handleSubmit}>
