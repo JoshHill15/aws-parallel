@@ -22,7 +22,6 @@ function StudentProblemPage({ email }) {
     //         email = localStorage.getItem(key)
     //     }
     // }
-
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()

@@ -79,10 +79,9 @@ function Problem({ userGroup, email }) {
         textBoxData.current.value = ""
         setProblemName("")
     };
-    console.log(userGroup);
     return (
         <div className="container">
-            {{userGroup} === 'Students' ? <StudentProblemPage />: <InstructorProblemPage />}
+            {userGroup === 'Students' ? <StudentProblemPage />: <InstructorProblemPage />}
             
         </div>
     )
