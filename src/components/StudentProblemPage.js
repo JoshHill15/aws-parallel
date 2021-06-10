@@ -3,13 +3,11 @@ import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
-import StudentProblemPage from './StudentProblemPage';
-import InstructorProblemPage from './InstructorProblemPage';
 import { v4 as uuidv4 } from 'uuid';
 import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
-function Problem({ userGroup, email }) {
+function StudentProblemPage({ email }) {
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -24,7 +22,6 @@ function Problem({ userGroup, email }) {
     //         email = localStorage.getItem(key)
     //     }
     // }
-
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
@@ -42,7 +39,7 @@ function Problem({ userGroup, email }) {
             submission: CFFile,
             instructor_email: state.value.instructor_email,
             grade: "N/A",
-            instructorReview: checkBoxData,
+            // instructorReview: checkBoxData.current.value,
             studentsName: email,
             problemName: state.value.problemName
 
@@ -81,9 +78,38 @@ function Problem({ userGroup, email }) {
     };
     return (
         <div className="container">
-            {userGroup === 'Students' ? <StudentProblemPage />: <InstructorProblemPage />}
-            
+            <Form >
+                <Form.Group controlId="formBasicEmail">
+                    {/* <Form.Label>Problem Name</Form.Label>
+                    <Form.Control size='lg' value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" /> */}
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Scenario: </Form.Label>
+                    <Form.Control plaintext readOnly defaultValue={state.value.problemName}></Form.Control>
+                    <Form.Control plaintext readOnly defaultValue={state.value.textBoxData} ></Form.Control>
+                    <Container>
+                        <Row>
+                            <Col xs={6} md={8}>
+                                <Image src={state.value.diagram} fluid rounded alt="image" />
+                            </Col>
+                        </Row>
+                    </Container>
+                </Form.Group>
+                    <Form.Group className="upload-fields">
+                    <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
+                </Form.Group>
+                <Form.Group controlId="exampleForm.ControlTextarea1">
+                    <Form.Label>Input Feedback</Form.Label>
+                    <Form.Control ref={textBoxData} as="textarea" rows={3} />
+                    <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Instructor Review" />
+                </Form.Group>
+                <Form.Group>
+                    <button className="submit" onClick={handleSubmit}>
+                        Submit
+                    </button>
+                </Form.Group>
+            </Form>
         </div>
     )
 }
-export default Problem
+export default StudentProblemPage
