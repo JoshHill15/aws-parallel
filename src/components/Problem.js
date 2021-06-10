@@ -3,11 +3,11 @@ import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
-function Problem({ email }){
+function Problem({ email }) {
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -15,7 +15,6 @@ function Problem({ email }){
     const [problemName, setProblemName] = useState("")
     var id = 9;
     const { state } = useLocation();
-    console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     // for (var key in localStorage){
@@ -35,18 +34,31 @@ function Problem({ email }){
             id,
             instructorEmail: state.value.instructor_email
         }
-        console.log(studentSubmission)
-        
+        // console.log(studentSubmission)
+
         const submissionForInstructor = {
             submission: CFFile,
             instructor_email: state.value.instructor_email,
             grade: "N/A",
             instructorReview: checkBoxData.current.value,
-            studentsName: email
+            studentsName: email,
+            problemName: state.value.problemName
 
         }
 
-        // api call
+        const submissionBody = {
+            body: submissionForInstructor
+        }
+
+        API.post("studentProblems", "/studentProblems", submissionBody)
+            .then(response => {
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
+
+
+
         //TODO 
         const instructorApiName = "instructorProblems"
         const instructorPath = "instructorProblems/"
@@ -57,7 +69,7 @@ function Problem({ email }){
         }
         API.post(apiName, path, myInit)
             .then(response => {
-                console.log({response})
+                console.log({ response })
             })
             .catch(error => {
                 console.log(error.response)
@@ -79,13 +91,13 @@ function Problem({ email }){
                     <Container>
                         <Row>
                             <Col xs={6} md={8}>
-                    <Image src={state.value.diagram} fluid rounded alt="image" />
-                    </Col>
-                    </Row>
+                                <Image src={state.value.diagram} fluid rounded alt="image" />
+                            </Col>
+                        </Row>
                     </Container>
                 </Form.Group>
                 <Form.Group className="upload-fields">
-                    <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])}/>
+                    <Form.File id="exampleFormControlFile1" label="Upload CloudFormation Template" onChange={e => setCFFile(e.target.files[0])} />
                 </Form.Group>
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
