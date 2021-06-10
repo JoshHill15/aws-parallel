@@ -40,7 +40,7 @@ function Problem({ email }) {
             submission: CFFile,
             instructor_email: state.value.instructor_email,
             grade: "N/A",
-            // instructorReview: checkBoxData.current.value,
+            instructorReview: checkBoxData,
             studentsName: email,
             problemName: state.value.problemName
 
