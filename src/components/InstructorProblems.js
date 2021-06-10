@@ -4,8 +4,11 @@ import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
 import { API, Storage } from "aws-amplify"
 
+
+
 function InstructorProblems({ email }) {
     const [rows, setRows] = useState([])
+    
 
     async function getInstructorProblems(){
         const myInit = {
@@ -21,6 +24,7 @@ function InstructorProblems({ email }) {
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
+            console.log({res})
             setRows(res)
         }
         catch(err) {
@@ -28,21 +32,21 @@ function InstructorProblems({ email }) {
 
         }
     }
-    async function getInstructorProblem() {
-        const myInit = {
-            queryStringParameters: {
-                instructor_email: email,
-                problemID: 3
-            }
-        }
-        try {
-            const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-            console.log("look here", result)
-        }
-        catch (err) {
-            console.error("err: ", err)
-        }
-    }
+    // async function getInstructorProblem() {
+    //     const myInit = {
+    //         queryStringParameters: {
+    //             instructor_email: email,
+    //             problemID: 3
+    //         }
+    //     }
+    //     try {
+    //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
+    //         console.log("look here", result)
+    //     }
+    //     catch (err) {
+    //         console.error("err: ", err)
+    //     }
+    // }
 
     useEffect(() => {
         if (email !== "") getInstructorProblems()
@@ -50,6 +54,8 @@ function InstructorProblems({ email }) {
     // useEffect(() => {
     //     if (email !== "") getInstructorProblem()
     // }, [email])
+
+
 
 
     const columns = [
