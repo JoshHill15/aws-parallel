@@ -59,7 +59,6 @@ const convertUrlType = (param, type) => {
  ********************************/
 
  app.get(path + "/scan", function(req, res) {
-   console.log("INSIDE")
    var condition = {}
    condition[partitionKeyName] = {
      ComparisonOperator: 'EQ'
@@ -118,7 +117,6 @@ app.get(path + hashKeyPath, function(req, res) {
  * HTTP Get method for get single object *
  *****************************************/
 app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
-  console.log("inside")
   var params = {};
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
@@ -144,8 +142,6 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
     TableName: tableName,
     Key: params
   }
-
-  console.log("getitemparams", getItemParams)
 
   dynamodb.get(getItemParams,(err, data) => {
     if(err) {

@@ -1,0 +1,9 @@
+.download-button {
+    background: #EC7211;
+    color: white;
+    font-weight: 500;
+    padding: 1% 3%;
+}
+.download-button:hover {
+    color: #FFE6C1;
+}

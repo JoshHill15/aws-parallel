@@ -3,20 +3,18 @@ import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
-function Problem( {userGroup} ){
+function Problem({ email }) {
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
-    const checkBoxData = useRef()
+    const [checkBoxData, setCheckBoxData] = useState(false)
     const [problemName, setProblemName] = useState("")
-    var email;
     var id = 9;
     const { state } = useLocation();
-    console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     // for (var key in localStorage){
@@ -31,47 +29,36 @@ function Problem( {userGroup} ){
         const studentSubmission = {
             CFFile,
             textBoxData: textBoxData.current.value,
-            checkBoxData: checkBoxData.current.value,
+            checkBoxData,
             problemName: state.value.problemName,
             id,
             instructorEmail: state.value.instructor_email
         }
         console.log(studentSubmission)
-        // async function getInstructorProblem() {
-        //     const myInit = {
-        //         queryStringParameters: {
-        //             instructor_email: "josh_hill15@me.com",
-        //             problemID: 2
-        //         }
-        //     }
-        //     try {
-        //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-        //         console.log("This is the result: ")
-        //         console.log({ result })
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-        //     }
-        // }
-        // async function getProblem() {
-        //     try {
-        //         let res = await API.get("instructorProblems", "/instructorProblems/query", {})
-        //         console.log('{ res }', res)
-        //         res = await Promise.all(res.map(async cv => {
-        //             cv.diagram = await Storage.get(cv.diagramName)
-        //             return cv
-        //         }))
-        //         setProblems(res)
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-    
-        //     }
-        // }
 
-       // console.log(instructorSubmission)
+        const submissionForInstructor = {
+            submission: CFFile,
+            instructor_email: state.value.instructor_email,
+            grade: "N/A",
+            // instructorReview: checkBoxData.current.value,
+            studentsName: email,
+            problemName: state.value.problemName
 
-        // api call
+        }
+
+        const submissionBody = {
+            body: submissionForInstructor
+        }
+
+        API.post("studentProblems", "/studentProblems", submissionBody)
+            .then(response => {
+            })
+            .catch(error => {
+                console.log(error.response)
+            })
+
+
+
         //TODO 
         const instructorApiName = "instructorProblems"
         const instructorPath = "instructorProblems/"
@@ -82,7 +69,7 @@ function Problem( {userGroup} ){
         }
         API.post(apiName, path, myInit)
             .then(response => {
-                console.log({response})
+                console.log({ response })
             })
             .catch(error => {
                 console.log(error.response)
@@ -104,9 +91,9 @@ function Problem( {userGroup} ){
                     <Container>
                         <Row>
                             <Col xs={6} md={8}>
-                    <Image src={state.value.diagram} fluid rounded alt="image" />
-                    </Col>
-                    </Row>
+                                <Image src={state.value.diagram} fluid rounded alt="image" />
+                            </Col>
+                        </Row>
                     </Container>
                 </Form.Group>
                 {{ userGroup } != "Students" &&
@@ -118,7 +105,7 @@ function Problem( {userGroup} ){
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={3} />
-                    <Form.Check ref={checkBoxData} type="checkbox" label="Request Manual Feedback" />
+                    <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Manual Feedback" />
                 </Form.Group>
                 }
                 {{ userGroup } !== "Students" &&

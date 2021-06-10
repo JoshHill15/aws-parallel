@@ -57,10 +57,8 @@ const convertUrlType = (param, type) => {
 /********************************
  * HTTP Get method for list objects *
  ********************************/
-console.log("here")
 
 app.get(path + hashKeyPath, function(req, res) {
-  console.log("inside", req.query)
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -70,7 +68,7 @@ app.get(path + hashKeyPath, function(req, res) {
     condition[partitionKeyName]['AttributeValueList'] = [req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH ];
   } else {
     try {
-      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.params[partitionKeyName], partitionKeyType) ];
+      condition[partitionKeyName]['AttributeValueList'] = [ convertUrlType(req.query[partitionKeyName], partitionKeyType) ];
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});

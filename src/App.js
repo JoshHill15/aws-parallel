@@ -18,7 +18,12 @@ const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
-   
+    const [email, setEmail] = useState("")
+
+    Auth.currentAuthenticatedUser()
+        .then(data => setEmail(data.username))
+        .catch(err => console.log(err))
+
     async function getProblems() {
         //scan table createProblem
         try {
@@ -44,7 +49,7 @@ const App = () => {
             const group = decodedToken["cognito:groups"][0]
             localStorage.setItem("userGroup", group)
             setUserGroup(group)
-    
+
         })
             .catch(err => console.log(err))
     }
@@ -62,7 +67,7 @@ const App = () => {
         if (userGroup === "Students") return <StudentHeader />
         else return null
     }
-    
+
     const logger = new Logger('My-Logger');
 
     const listener = (data) => {
@@ -73,24 +78,23 @@ const App = () => {
                 const group = localStorage.getItem("userGroup")
                 setUserGroup(group)
                 history.push("/home")
-
-
                 break;
+
             case 'signUp':
                 logger.info('user signed up');
                 getUserGroup()
                 const g = localStorage.getItem("userGroup")
                 localStorage.setItem("total-problems", 0)
                 setUserGroup(g)
-
                 break;
+
             case 'signOut':
                 logger.info('user signed out');
                 localStorage.removeItem("userGroup")
                 setUserGroup(null)
                 history.push("/")
-
                 break;
+
             case 'signIn_failure':
                 logger.error('user sign in failed');
                 break;
@@ -114,13 +118,13 @@ const App = () => {
         <div>
             {routeToCorrectHeader()}
             <Route exact={true} path="/" component={Login} />
-            <Route exact={true} path="/home" render={(props) => <Home {...props} problems={problems} />} />
-            <Route exact={true} path="/problems" component={InstructorProblems} />
+            <Route exact={true} path="/home" render={props => <Home {...props} problems={problems} />} />
+            <Route exact={true} path="/problems" render={props => <InstructorProblems {...props} email={email} />} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
             <Route exact={true} path="/studentproblems" component={StudentProblems} />
-            <Route exact={true} path="/students" component={InstructorsStudents} />
+            <Route exact={true} path="/students" render={props => <InstructorsStudents {...props} email={email} />} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
-            <Route exact={true} path="/problem/:id" render={(props) => <Problem {...props} userGroup={ userGroup } />} />
+            <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />
         </div>
     );
 };

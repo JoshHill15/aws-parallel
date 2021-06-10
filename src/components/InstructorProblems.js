@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { DataGrid } from '@material-ui/data-grid';
 import "../styles/InstructorProblems.css"
-import { API, Auth, Storage } from "aws-amplify"
+import { API, Storage } from "aws-amplify"
 
-function InstructorProblems() {
-    const [email, setEmail] = useState("")
+
+
+function InstructorProblems({ email }) {
     const [rows, setRows] = useState([])
-
-    Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
-        .catch(err => console.log(err))
+    
 
     async function getInstructorProblems(){
         const myInit = {
@@ -26,6 +24,7 @@ function InstructorProblems() {
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
+            console.log({res})
             setRows(res)
         }
         catch(err) {
@@ -33,28 +32,30 @@ function InstructorProblems() {
 
         }
     }
-    async function getInstructorProblem() {
-        const myInit = {
-            queryStringParameters: {
-                instructor_email: email,
-                problemID: 3
-            }
-        }
-        try {
-            const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-            console.log("look here", result)
-        }
-        catch (err) {
-            console.error("err: ", err)
-        }
-    }
+    // async function getInstructorProblem() {
+    //     const myInit = {
+    //         queryStringParameters: {
+    //             instructor_email: email,
+    //             problemID: 3
+    //         }
+    //     }
+    //     try {
+    //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
+    //         console.log("look here", result)
+    //     }
+    //     catch (err) {
+    //         console.error("err: ", err)
+    //     }
+    // }
 
     useEffect(() => {
         if (email !== "") getInstructorProblems()
     },[email])
-    useEffect(() => {
-        if (email !== "") getInstructorProblem()
-    }, [email])
+    // useEffect(() => {
+    //     if (email !== "") getInstructorProblem()
+    // }, [email])
+
+
 
 
     const columns = [
