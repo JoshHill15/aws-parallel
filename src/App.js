@@ -19,9 +19,12 @@ const App = () => {
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
+    const [id, setID] = useState("");
 
     Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
+        .then(data => {setEmail(data.username)
+            console.log("user data", data);
+        })
         .catch(err => console.log(err))
 
     async function getProblems() {
@@ -121,7 +124,7 @@ const App = () => {
             <Route exact={true} path="/home" render={props => <Home {...props} problems={problems} />} />
             <Route exact={true} path="/problems" render={props => <InstructorProblems {...props} email={email} />} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
-            <Route exact={true} path="/studentproblems" component={StudentProblems} />
+            <Route exact={true} path="/studentproblems" render={props => <StudentProblems {...props} id={email} />} />
             <Route exact={true} path="/students" render={props => <InstructorsStudents {...props} email={email} />} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />

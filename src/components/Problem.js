@@ -15,7 +15,7 @@ function Problem({ userGroup, email }) {
     const textBoxData = useRef()
     const [checkBoxData, setCheckBoxData] = useState(false)
     const [problemName, setProblemName] = useState("")
-    var id = 9;
+    var id = 23;
     const { state } = useLocation();
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
