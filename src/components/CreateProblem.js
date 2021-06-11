@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import "../styles/createProblem.css"
@@ -8,7 +8,6 @@ function CreateProblem(){
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
     const [problemName, setProblemName] = useState("")
-
 
     // Information needed to write to S3/DynamoDB
     
@@ -24,17 +23,24 @@ function CreateProblem(){
         }
     }
 
+    // LOAD CFFILE TO fileContent
+    useEffect(() => {
+        
+        if(CFFile !== ""){
+        reader.readAsText(CFFile);
+        }
+    
+        reader.onload = function(e){
+        setfileContent(e.target.result);
+    }
+    }, [CFFile]);
+    
+    
 
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
         
-        // LOAD CFFILE TO fileContent
-        reader.readAsText(CFFile);
-        
-        reader.onload = function(e){
-            setfileContent(e.target.result);
-        }
         
 
         const instructorSubmission = {
@@ -46,12 +52,14 @@ function CreateProblem(){
             email,
         }
         
+        console.log(fileContent);
 
-        // USING STORAGE TO STORE IMAGE
-        Storage.put(diagramName, diagram)
-            .then(res => {
-            }).catch(e => console.log(e))
-        // api call
+        // USING S3 TO STORE IMAGE
+        // Storage.put(diagramName, diagram)
+        //     .then(res => {
+        //     }).catch(e => console.log(e))
+        
+            // api call
         const apiName = "createProblem"
         const path = "/createProblem"
         const myInit = {
@@ -63,7 +71,8 @@ function CreateProblem(){
             })
             .catch(error => {
                 console.log(error.response)
-            })
+           })
+           
         textBoxData.current.value = ""
         setProblemName("")
     };

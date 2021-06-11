@@ -16,7 +16,7 @@ function Problem(){
     var email;
     var id = 9;
     const { state } = useLocation();
-    console.log( {state} );
+    //console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     // for (var key in localStorage){
@@ -28,6 +28,8 @@ function Problem(){
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
+
+        
         const studentSubmission = {
             CFFile,
             textBoxData: textBoxData.current.value,
@@ -35,6 +37,15 @@ function Problem(){
             problemName: state.value.problemName,
             id,
             instructorEmail: state.value.instructor_email
+            
+            // INFORMATION ON THE PAGE
+            // CFFile
+            // diagram
+            // diagramName
+            // instructor_email
+            // problemID
+            // problemName
+            // textBoxData
         }
         console.log(studentSubmission)
         // async function getInstructorProblem() {
