@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/submissions",
+      "lambdaFunction": "submissionsFunction",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/submissions"
+    }
+  ],
+  "resourceName": "submissions",
+  "apiName": "submissions",
+  "functionArns": [
+    {
+      "lambdaFunction": "submissionsFunction"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+    "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "submissionsFunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

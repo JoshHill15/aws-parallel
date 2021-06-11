@@ -28,7 +28,7 @@ const partitionKeyType = "N";
 const sortKeyName = "";
 const sortKeyType = "";
 const hasSortKey = sortKeyName !== "";
-const path = "/studentSubmissions";
+const path = "/submissions";
 const UNAUTH = 'UNAUTH';
 const hashKeyPath = '/:' + partitionKeyName;
 const sortKeyPath = hasSortKey ? '/:' + sortKeyName : '';
@@ -59,7 +59,6 @@ const convertUrlType = (param, type) => {
  ********************************/
 
 app.get(path + hashKeyPath, function(req, res) {
-  console.log("HERE.");
   var condition = {}
   condition[partitionKeyName] = {
     ComparisonOperator: 'EQ'
@@ -84,8 +83,8 @@ app.get(path + hashKeyPath, function(req, res) {
   console.log("Query Params: ", queryParams);
   dynamodb.query(queryParams, (err, data) => {
     if (err) {
-      console.log("ERROR: ", err);
       res.statusCode = 500;
+      console.log("ERROR: ", err);
       res.json({error: 'Could not load items: ' + err});
     } else {
       res.json(data.Items);

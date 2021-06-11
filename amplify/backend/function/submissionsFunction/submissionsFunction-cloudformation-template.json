@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "studentSubmissions",
+            "submissionsFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "studentSubmissions",
+                  "submissionsFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "awsparallelLambdaRole43aa734f",
+            "awsparallelLambdaRolef0dc050a",
             {
               "Fn::Join": [
                 "",
                 [
-                  "awsparallelLambdaRole43aa734f",
+                  "awsparallelLambdaRolef0dc050a",
                   "-",
                   {
                     "Ref": "env"

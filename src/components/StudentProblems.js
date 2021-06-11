@@ -13,7 +13,7 @@ function StudentProblems({ email }) {
     }
     try {
         let count = 1
-        let res = await API.get("studentSubmissions", "/studentSubmissions/:student_email", myInit)
+        let res = await API.get("submissions", "/submissions/:student_email", myInit)
         res = res.map(cv => {
             cv.id = count++
             console.log("It's working", cv);
@@ -40,8 +40,8 @@ function StudentProblems({ email }) {
     // ]
 
     useEffect(() => {
-        if (id !== "") getSubmittedProblems()
-    }, [id])
+        if (email !== "") getSubmittedProblems()
+    }, [email])
 
     return (
         <div>

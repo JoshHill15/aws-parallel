@@ -3,28 +3,22 @@
     "Description": "API Gateway resource stack creation using Amplify CLI",
     
     "Parameters": {
-        "authRoleName": {
-            "Type":  "String"
-        },
-        "unauthRoleName": {
-            "Type":  "String"
-        },
         "env": {
             "Type": "String"
         },
     
     
-          "functionstudentSubmissionsName": {
+          "functionsubmissionsFunctionName": {
             "Type": "String",
-            "Default": "functionstudentSubmissionsName"
+            "Default": "functionsubmissionsFunctionName"
           },
-        
+
           
-          "functionstudentSubmissionsArn": {
+          "functionsubmissionsFunctionArn": {
             "Type": "String",
-            "Default": "functionstudentSubmissionsArn"
+            "Default": "functionsubmissionsFunctionArn"
           }
-        
+
           
           
     
@@ -43,18 +37,16 @@
         
         
         
-        
-        
-      "studentSubmissions": {
+      "submissions": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "studentSubmissions",
+          "Name": "submissions",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "studentSubmissions"
+              "title": "submissions"
             },
             "host": {
                 "Fn::Join": [
@@ -82,7 +74,7 @@
                           }
                       ]
                   ]
-                } 
+                }
               ]
             },
             "schemes": [
@@ -90,7 +82,7 @@
             ],
             "paths": {
               
-              "/studentSubmissions": {
+              "/submissions": {
                 "options": {
                   "consumes": [
                     "application/json"
@@ -175,8 +167,8 @@
                             ":lambda:path/2015-03-31/functions/",
                             
                             {
-                                
-                                "Ref": "functionstudentSubmissionsArn"
+
+                                "Ref": "functionsubmissionsFunctionArn"
                             },
                             
                             "/invocations"
@@ -189,7 +181,7 @@
                   }
                 }
               },
-              "/studentSubmissions/{proxy+}": {
+              "/submissions/{proxy+}": {
                 "options": {
                   "consumes": [
                     "application/json"
@@ -274,8 +266,8 @@
                           ":lambda:path/2015-03-31/functions/",
                           
                           {
-                            
-                            "Ref": "functionstudentSubmissionsArn"
+
+                            "Ref": "functionsubmissionsFunctionArn"
                           },
                           
                           "/invocations"
@@ -287,7 +279,7 @@
                     "type": "aws_proxy"
                   }
                 }
-              }   
+              }
               
             },
             "securityDefinitions": {
@@ -329,15 +321,15 @@
         }
       },
 
-                  
+      
         
-        
-        "functionstudentSubmissionsPermissionstudentSubmissions": {
+
+        "functionsubmissionsFunctionPermissionsubmissions": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionstudentSubmissionsName"
+                        "Ref":  "functionsubmissionsFunctionName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -356,7 +348,7 @@
                             },
                             ":",
                             {
-                                "Ref": "studentSubmissions"
+                                "Ref": "submissions"
                             },
                             "/*/*/*"
                         ]
@@ -366,22 +358,22 @@
         },
         
         
-        
-      "DeploymentAPIGWstudentSubmissions": {
+
+      "DeploymentAPIGWsubmissions": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
           "StageName": {
             "Fn::If": [
               "ShouldNotCreateEnvResources",
-              "Prod", 
+              "Prod",
               {
                 "Ref": "env"
-              } 
+              }
             ]
           },
           "RestApiId": {
-            "Ref": "studentSubmissions"
+            "Ref": "submissions"
           }
         }
       }
@@ -389,15 +381,15 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "studentSubmissions"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "submissions"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "studentSubmissions"
+          "Value": "submissions"
         },
         "ApiId": {
           "Description": "API ID (prefix of API URL)",
-          "Value": {"Ref": "studentSubmissions"}
+          "Value": {"Ref": "submissions"}
         }
     }
   }

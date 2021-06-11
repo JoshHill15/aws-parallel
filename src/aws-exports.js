@@ -20,13 +20,13 @@ const awsmobile = {
             "region": "us-east-1"
         },
         {
-            "name": "studentSubmissions",
-            "endpoint": "https://owmh0ytcqa.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "studentProblems",
+            "endpoint": "https://lct4f5nwaa.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         },
         {
-            "name": "studentProblems",
-            "endpoint": "https://lct4f5nwaa.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "submissions",
+            "endpoint": "https://xwfeyp0518.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ],
