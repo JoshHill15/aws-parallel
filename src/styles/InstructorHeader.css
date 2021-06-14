@@ -10,15 +10,23 @@
     font-size: 0.975rem;
     font-weight: 600;
     font-family:"Amazon Ember";
-    cursor: pointer;
 }
 
 .links{
     color:white;
     text-decoration: none;
+    cursor: pointer;
+
 }
 
 .links:hover {
     color: #FFE6C1;
     text-decoration: none;
+}
+
+.user-email {
+    padding-top: 1%;
+    cursor:default;
+    display: flex;
+    align-self: center;
 }

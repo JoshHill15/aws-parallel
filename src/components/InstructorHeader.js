@@ -4,7 +4,7 @@ import { AmplifySignOut } from '@aws-amplify/ui-react'
 import { Link } from "react-router-dom";
 
 
-function InstructorHeader() {
+function InstructorHeader({ email }) {
 
     return (
         <div className="main-div">
@@ -12,6 +12,8 @@ function InstructorHeader() {
             <Link className="links" to="/problems">Problems</Link>
             <Link className="links" to="/students">Students</Link>
             <AmplifySignOut />
+            <p className="user-email">Welcome, {email}</p>
+
         </div>
     )
 }

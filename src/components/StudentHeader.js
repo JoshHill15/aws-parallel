@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function StudentHeader() {
+function StudentHeader({ email }) {
     //added variable to utilize the obj created above
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -57,6 +57,8 @@ function StudentHeader() {
                     <MenuItem style={{ paddingLeft: 13 }} onClick={handleClose}>My Account</MenuItem>
                 </Link>
             </Menu>
+            <p className="user-email">Welcome, {email}</p>
+
         </div>
     )
 }

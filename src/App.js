@@ -60,11 +60,11 @@ const App = () => {
 
     useEffect(() => {
         getProblems()
-    }, [])
+    }, [problems])
 
     function routeToCorrectHeader() {
-        if (userGroup === "Instructors") return <InstructorHeader />
-        if (userGroup === "Students") return <StudentHeader />
+        if (userGroup === "Instructors") return <InstructorHeader email={email}/>
+        if (userGroup === "Students") return <StudentHeader email ={email}/>
         else return null
     }
 
