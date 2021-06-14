@@ -32,9 +32,9 @@
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
           "s3Key": "amplify-builds/comparisonFunction-52586571704b31544e4d-build.zip"
         },
-        "submissionsFunction": {
+        "studentSubmissionFunction": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
-          "s3Key": "amplify-builds/submissionsFunction-5035645579744d375667-build.zip"
+          "s3Key": "amplify-builds/studentSubmissionFunction-31556b74676941547770-build.zip"
         }
       },
       "storage": {

@@ -8,16 +8,16 @@ function StudentProblems({ email }) {
     async function getSubmittedProblems() {
         const myInit = {
             queryStringParameters: {
-                student_email: email
+                email: email
             }
     }
     try {
         let count = 1
-        let res = await API.get("submissions", "/submissions/:student_email", myInit)
+        let res = await API.get("studentSubmissionAPI", "/studentSubmission/:email", myInit)
+        console.log("Look here: ", res);
         res = res.map(cv => {
             cv.id = count++
             console.log("It's working", cv);
-
             return cv
         })
         setRows(res)

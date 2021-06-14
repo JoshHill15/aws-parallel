@@ -16,13 +16,13 @@
     "s3Key": {
       "Type": "String"
     },
-    "storagestudentSubmissionsName": {
+    "storagestudentSubmissionsTableName": {
       "Type": "String",
-      "Default": "storagestudentSubmissionsName"
+      "Default": "storagestudentSubmissionsTableName"
     },
-    "storagestudentSubmissionsArn": {
+    "storagestudentSubmissionsTableArn": {
       "Type": "String",
-      "Default": "storagestudentSubmissionsArn"
+      "Default": "storagestudentSubmissionsTableArn"
     }
   },
   "Conditions": {
@@ -55,12 +55,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "submissionsFunction",
+            "studentSubmissionFunction",
             {
               "Fn::Join": [
                 "",
                 [
-                  "submissionsFunction",
+                  "studentSubmissionFunction",
                   "-",
                   {
                     "Ref": "env"
@@ -97,12 +97,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "awsparallelLambdaRolef0dc050a",
+            "awsparallelLambdaRoleea987d3d",
             {
               "Fn::Join": [
                 "",
                 [
-                  "awsparallelLambdaRolef0dc050a",
+                  "awsparallelLambdaRoleea987d3d",
                   "-",
                   {
                     "Ref": "env"
@@ -182,14 +182,14 @@
               ],
               "Resource": [
                 {
-                  "Ref": "storagestudentSubmissionsArn"
+                  "Ref": "storagestudentSubmissionsTableArn"
                 },
                 {
                   "Fn::Join": [
                     "/",
                     [
                       {
-                        "Ref": "storagestudentSubmissionsArn"
+                        "Ref": "storagestudentSubmissionsTableArn"
                       },
                       "index/*"
                     ]

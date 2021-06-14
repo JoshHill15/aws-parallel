@@ -4,14 +4,12 @@ import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
-import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
 function StudentProblemPage({ email }) {
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
-    const [checkBoxData, setCheckBoxData] = useState(false)
     const [problemName, setProblemName] = useState("")
     var id = 9;
     const { state } = useLocation();
@@ -27,8 +25,6 @@ function StudentProblemPage({ email }) {
         e.preventDefault()
         const studentSubmission = {
             CFFile,
-            textBoxData: textBoxData.current.value,
-            checkBoxData,
             problemName: state.value.problemName,
             id,
             instructorEmail: state.value.instructor_email
@@ -61,8 +57,8 @@ function StudentProblemPage({ email }) {
         //TODO 
         const instructorApiName = "instructorProblems"
         const instructorPath = "instructorProblems/"
-        const apiName = "studentSubmissions"
-        const path = "/studentSubmissions"
+        const apiName = "studentSubmissionAPI"
+        const path = "/studentSubmission"
         const myInit = {
             body: studentSubmission
         }
@@ -101,7 +97,7 @@ function StudentProblemPage({ email }) {
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={3} />
-                    <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Instructor Review" />
+                    {/* <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Instructor Review" /> */}
                 </Form.Group>
                 <Form.Group>
                     <button className="submit" onClick={handleSubmit}>

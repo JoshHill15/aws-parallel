@@ -1,19 +1,19 @@
 {
   "paths": [
     {
-      "name": "/submissions",
-      "lambdaFunction": "submissionsFunction",
+      "name": "/comparisonfunction",
+      "lambdaFunction": "comparisonFunction",
       "privacy": {
         "open": true
       },
-      "policyResourceName": "/submissions"
+      "policyResourceName": "/comparisonfunction"
     }
   ],
-  "resourceName": "submissions",
-  "apiName": "submissions",
+  "resourceName": "comparisonfunction",
+  "apiName": "comparisonfunction",
   "functionArns": [
     {
-      "lambdaFunction": "submissionsFunction"
+      "lambdaFunction": "comparisonFunction"
     }
   ],
   "privacy": {
@@ -25,7 +25,7 @@
   "dependsOn": [
     {
       "category": "function",
-      "resourceName": "submissionsFunction",
+      "resourceName": "comparisonFunction",
       "attributes": [
         "Name",
         "Arn"

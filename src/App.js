@@ -124,7 +124,7 @@ const App = () => {
             <Route exact={true} path="/home" render={props => <Home {...props} problems={problems} />} />
             <Route exact={true} path="/problems" render={props => <InstructorProblems {...props} email={email} />} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
-            <Route exact={true} path="/studentproblems" render={props => <StudentProblems {...props} id={email} />} />
+            <Route exact={true} path="/studentproblems" render={props => <StudentProblems {...props} email={email} />} />
             <Route exact={true} path="/students" render={props => <InstructorsStudents {...props} email={email} />} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />

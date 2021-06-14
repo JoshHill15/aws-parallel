@@ -25,8 +25,13 @@ const awsmobile = {
             "region": "us-east-1"
         },
         {
-            "name": "submissions",
-            "endpoint": "https://xwfeyp0518.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "comparisonfunction",
+            "endpoint": "https://5evh7d8063.execute-api.us-east-1.amazonaws.com/dev",
+            "region": "us-east-1"
+        },
+        {
+            "name": "studentSubmissionAPI",
+            "endpoint": "https://wqf2jgsiyc.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ],
@@ -37,11 +42,11 @@ const awsmobile = {
             "region": "us-east-1"
         },
         {
-            "tableName": "studentSubmissions-dev",
+            "tableName": "studentProblems-dev",
             "region": "us-east-1"
         },
         {
-            "tableName": "studentProblems-dev",
+            "tableName": "studentSubmissionsTable-dev",
             "region": "us-east-1"
         }
     ],

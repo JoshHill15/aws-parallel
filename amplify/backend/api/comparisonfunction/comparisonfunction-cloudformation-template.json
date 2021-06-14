@@ -8,15 +8,15 @@
         },
     
     
-          "functionsubmissionsFunctionName": {
+          "functioncomparisonFunctionName": {
             "Type": "String",
-            "Default": "functionsubmissionsFunctionName"
+            "Default": "functioncomparisonFunctionName"
           },
 
           
-          "functionsubmissionsFunctionArn": {
+          "functioncomparisonFunctionArn": {
             "Type": "String",
-            "Default": "functionsubmissionsFunctionArn"
+            "Default": "functioncomparisonFunctionArn"
           }
 
           
@@ -37,16 +37,16 @@
         
         
         
-      "submissions": {
+      "comparisonfunction": {
         "Type": "AWS::ApiGateway::RestApi",
         "Properties": {
           "Description": "",
-          "Name": "submissions",
+          "Name": "comparisonfunction",
           "Body": {
             "swagger": "2.0",
             "info": {
               "version": "2018-05-24T17:52:00Z",
-              "title": "submissions"
+              "title": "comparisonfunction"
             },
             "host": {
                 "Fn::Join": [
@@ -82,7 +82,7 @@
             ],
             "paths": {
               
-              "/submissions": {
+              "/comparisonfunction": {
                 "options": {
                   "consumes": [
                     "application/json"
@@ -168,7 +168,7 @@
                             
                             {
 
-                                "Ref": "functionsubmissionsFunctionArn"
+                                "Ref": "functioncomparisonFunctionArn"
                             },
                             
                             "/invocations"
@@ -181,7 +181,7 @@
                   }
                 }
               },
-              "/submissions/{proxy+}": {
+              "/comparisonfunction/{proxy+}": {
                 "options": {
                   "consumes": [
                     "application/json"
@@ -267,7 +267,7 @@
                           
                           {
 
-                            "Ref": "functionsubmissionsFunctionArn"
+                            "Ref": "functioncomparisonFunctionArn"
                           },
                           
                           "/invocations"
@@ -324,12 +324,12 @@
       
         
 
-        "functionsubmissionsFunctionPermissionsubmissions": {
+        "functioncomparisonFunctionPermissioncomparisonfunction": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
                 "FunctionName": 
                     {
-                        "Ref":  "functionsubmissionsFunctionName"
+                        "Ref":  "functioncomparisonFunctionName"
                     },
                     
                     "Action": "lambda:InvokeFunction",
@@ -348,7 +348,7 @@
                             },
                             ":",
                             {
-                                "Ref": "submissions"
+                                "Ref": "comparisonfunction"
                             },
                             "/*/*/*"
                         ]
@@ -359,7 +359,7 @@
         
         
 
-      "DeploymentAPIGWsubmissions": {
+      "DeploymentAPIGWcomparisonfunction": {
         "Type": "AWS::ApiGateway::Deployment",
         "Properties": {
           "Description": "The Development stage deployment of your API.",
@@ -373,7 +373,7 @@
             ]
           },
           "RestApiId": {
-            "Ref": "submissions"
+            "Ref": "comparisonfunction"
           }
         }
       }
@@ -381,15 +381,15 @@
     "Outputs": {
         "RootUrl": {
             "Description": "Root URL of the API gateway",
-            "Value": {"Fn::Join": ["", ["https://", {"Ref": "submissions"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
+            "Value": {"Fn::Join": ["", ["https://", {"Ref": "comparisonfunction"}, ".execute-api.", {"Ref": "AWS::Region"}, ".amazonaws.com/", {"Fn::If": ["ShouldNotCreateEnvResources","Prod", {"Ref": "env"} ]}]]}
         },
         "ApiName": {
           "Description": "API Friendly name",
-          "Value": "submissions"
+          "Value": "comparisonfunction"
         },
         "ApiId": {
           "Description": "API ID (prefix of API URL)",
-          "Value": {"Ref": "submissions"}
+          "Value": {"Ref": "comparisonfunction"}
         }
     }
   }
