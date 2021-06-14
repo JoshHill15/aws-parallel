@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
@@ -10,6 +10,7 @@ import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
 function Problem({ userGroup, email }) {
+    const [fileContent, setFileContent] = useState("")
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -17,6 +18,8 @@ function Problem({ userGroup, email }) {
     const [problemName, setProblemName] = useState("")
     var id = 9;
     const { state } = useLocation();
+    var reader = new FileReader()
+    //console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
     // for (var key in localStorage){
@@ -25,16 +28,39 @@ function Problem({ userGroup, email }) {
     //     }
     // }
 
+    useEffect(() => {
+        
+        if(CFFile !== ""){
+        reader.readAsText(CFFile);
+        }
+    
+        reader.onload = function(e){
+        setFileContent(e.target.result);
+    }
+    }, [CFFile]);
+
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
+
+        
+        
         const studentSubmission = {
-            CFFile,
+            fileContent,
             textBoxData: textBoxData.current.value,
             checkBoxData,
             problemName: state.value.problemName,
             id,
             instructorEmail: state.value.instructor_email
+            
+            // INFORMATION ON THE PAGE
+            // CFFile
+            // diagram
+            // diagramName
+            // instructor_email
+            // problemID
+            // problemName
+            // textBoxData
         }
         console.log(studentSubmission)
 
@@ -61,14 +87,15 @@ function Problem({ userGroup, email }) {
 
 
 
-        //TODO 
-        const instructorApiName = "instructorProblems"
-        const instructorPath = "instructorProblems/"
-        const apiName = "studentSubmissions"
-        const path = "/studentSubmissions"
+        // api call
+        const apiName = "submissions"
+        const path = "/comparisonFunction"
         const myInit = {
             body: studentSubmission
         }
+        
+        console.log(studentSubmission)
+
         API.post(apiName, path, myInit)
             .then(response => {
                 console.log({ response })
@@ -76,6 +103,7 @@ function Problem({ userGroup, email }) {
             .catch(error => {
                 console.log(error.response)
             })
+        
         textBoxData.current.value = ""
         setProblemName("")
     };
