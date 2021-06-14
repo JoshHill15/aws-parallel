@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/comparisonfunction",
+      "lambdaFunction": "comparisonFunction",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/comparisonfunction"
+    }
+  ],
+  "resourceName": "comparisonfunction",
+  "apiName": "comparisonfunction",
+  "functionArns": [
+    {
+      "lambdaFunction": "comparisonFunction"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-awsparallel-dev-141253-authRole",
+    "unAuthRoleName": "amplify-awsparallel-dev-141253-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "comparisonFunction",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

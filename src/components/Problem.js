@@ -65,8 +65,8 @@ function Problem(){
        // console.log(instructorSubmission)
 
         // api call
-        const apiName = "submissions"
-        const path = "/comparisonFunction"
+        const apiName = "comparisonfunction"
+        const path = "/comparisonfunction"
         const myInit = {
             body: studentSubmission
         }
@@ -78,7 +78,7 @@ function Problem(){
                 console.log({response})
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
             })
         
         textBoxData.current.value = ""
