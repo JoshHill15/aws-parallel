@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
@@ -8,6 +8,7 @@ import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
 function Problem(){
+    const [fileContent, setFileContent] = useState("")
     const [CFFile, setCFFile] = useState("")
     const [diagram, setDiagram] = useState("")
     const textBoxData = useRef()
@@ -16,6 +17,7 @@ function Problem(){
     var email;
     var id = 9;
     const { state } = useLocation();
+    var reader = new FileReader()
     //console.log( {state} );
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
@@ -25,13 +27,25 @@ function Problem(){
     //     }
     // }
 
+    useEffect(() => {
+        
+        if(CFFile !== ""){
+        reader.readAsText(CFFile);
+        }
+    
+        reader.onload = function(e){
+        setFileContent(e.target.result);
+    }
+    }, [CFFile]);
+
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
 
         
+        
         const studentSubmission = {
-            CFFile,
+            fileContent,
             textBoxData: textBoxData.current.value,
             checkBoxData: checkBoxData.current.value,
             problemName: state.value.problemName,
@@ -47,50 +61,18 @@ function Problem(){
             // problemName
             // textBoxData
         }
-        console.log(studentSubmission)
-        // async function getInstructorProblem() {
-        //     const myInit = {
-        //         queryStringParameters: {
-        //             instructor_email: "josh_hill15@me.com",
-        //             problemID: 2
-        //         }
-        //     }
-        //     try {
-        //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-        //         console.log("This is the result: ")
-        //         console.log({ result })
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-        //     }
-        // }
-        // async function getProblem() {
-        //     try {
-        //         let res = await API.get("instructorProblems", "/instructorProblems/query", {})
-        //         console.log('{ res }', res)
-        //         res = await Promise.all(res.map(async cv => {
-        //             cv.diagram = await Storage.get(cv.diagramName)
-        //             return cv
-        //         }))
-        //         setProblems(res)
-        //     }
-        //     catch (err) {
-        //         console.error("err: ", err)
-    
-        //     }
-        // }
 
        // console.log(instructorSubmission)
 
         // api call
-        //TODO 
-        const instructorApiName = "instructorProblems"
-        const instructorPath = "instructorProblems/"
-        const apiName = "studentSubmissions"
-        const path = "/studentSubmissions"
+        const apiName = "submissions"
+        const path = "/comparisonFunction"
         const myInit = {
             body: studentSubmission
         }
+        
+        console.log(studentSubmission)
+
         API.post(apiName, path, myInit)
             .then(response => {
                 console.log({response})
@@ -98,6 +80,7 @@ function Problem(){
             .catch(error => {
                 console.log(error.response)
             })
+        
         textBoxData.current.value = ""
         setProblemName("")
     };
