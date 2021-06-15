@@ -1,10 +1,8 @@
 import React, { useRef, useState } from "react"
 import { Form } from 'react-bootstrap';
-import { API, Storage } from "aws-amplify"
+import { API } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
-import { v4 as uuidv4 } from 'uuid';
-import { Checkbox } from "@material-ui/core";
 import { useLocation } from "react-router-dom";
 
 function StudentProblemPage({ email }) {
@@ -16,12 +14,6 @@ function StudentProblemPage({ email }) {
     var id = 9;
     const { state } = useLocation();
 
-    //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
-    // for (var key in localStorage){
-    //     if (key.match(/AuthUser$/g)) {
-    //         email = localStorage.getItem(key)
-    //     }
-    // }
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
@@ -59,8 +51,7 @@ function StudentProblemPage({ email }) {
 
 
         //TODO 
-        const instructorApiName = "instructorProblems"
-        const instructorPath = "instructorProblems/"
+
         const apiName = "studentSubmissions"
         const path = "/studentSubmissions"
         const myInit = {

@@ -24,25 +24,6 @@
         }
       ]
     },
-    "studentSubmissions": {
-      "build": true,
-      "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": [
-        {
-          "category": "storage",
-          "resourceName": "studentSubmissions",
-          "attributes": [
-            "Name",
-            "Arn"
-          ],
-          "attributeEnvMap": {
-            "Name": "TABLE_NAME",
-            "Arn": "TABLE_ARN"
-          }
-        }
-      ]
-    },
     "studentProblems": {
       "build": true,
       "providerPlugin": "awscloudformation",
@@ -66,6 +47,25 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "studentSubmissionFunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "studentSubmissionsTable",
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "attributeEnvMap": {
+            "Name": "TABLE_NAME",
+            "Arn": "TABLE_ARN"
+          }
+        }
+      ]
     }
   },
   "auth": {
@@ -105,20 +105,6 @@
         }
       ]
     },
-    "studentSubmissions": {
-      "service": "API Gateway",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [
-        {
-          "category": "function",
-          "resourceName": "studentSubmissions",
-          "attributes": [
-            "Name",
-            "Arn"
-          ]
-        }
-      ]
-    },
     "studentProblems": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
@@ -126,6 +112,34 @@
         {
           "category": "function",
           "resourceName": "studentProblems",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "comparisonfunction": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "comparisonFunction",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "studentSubmissionAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "studentSubmissionFunction",
           "attributes": [
             "Name",
             "Arn"
@@ -141,15 +155,15 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     },
-    "studentSubmissions": {
-      "service": "DynamoDB",
-      "providerPlugin": "awscloudformation"
-    },
     "awsparalleldiagrams": {
       "service": "S3",
       "providerPlugin": "awscloudformation"
     },
     "studentProblems": {
+      "service": "DynamoDB",
+      "providerPlugin": "awscloudformation"
+    },
+    "studentSubmissionsTable": {
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }

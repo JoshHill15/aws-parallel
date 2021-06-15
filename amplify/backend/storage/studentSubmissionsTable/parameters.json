@@ -1,0 +1,7 @@
+{
+    "tableName": "studentSubmissionsTable",
+    "partitionKeyName": "email",
+    "partitionKeyType": "S",
+    "sortKeyName": "problem_id",
+    "sortKeyType": "N"
+}

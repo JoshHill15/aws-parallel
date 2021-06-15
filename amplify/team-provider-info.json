@@ -34,11 +34,15 @@
         },
         "comparisonFunction": {
           "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
-<<<<<<< HEAD
-          "s3Key": "amplify-builds/studentProblems-4951634b6d41616f3458-build.zip"
-=======
           "s3Key": "amplify-builds/comparisonFunction-52586571704b31544e4d-build.zip"
->>>>>>> cb6c34fdab175c57d659f4b1bdd0deafc7f0d000
+        },
+        "submissionsFunction": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/submissionsFunction-5035645579744d375667-build.zip"
+        },
+        "studentSubmissionFunction": {
+          "deploymentBucketName": "amplify-awsparallel-dev-141253-deployment",
+          "s3Key": "amplify-builds/studentSubmissionFunction-31556b74676941547770-build.zip"
         }
       },
       "storage": {

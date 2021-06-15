@@ -20,10 +20,14 @@ const App = () => {
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
 
-    useEffect(() => {
+     function getEmail(){
         Auth.currentAuthenticatedUser()
         .then(data => setEmail(data.username))
         .catch(err => console.log(err))
+    }
+
+    useEffect(() => {
+        getEmail()
     },[])
 
 
