@@ -20,9 +20,12 @@ const App = () => {
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
 
-    Auth.currentAuthenticatedUser()
+    useEffect(() => {
+        Auth.currentAuthenticatedUser()
         .then(data => setEmail(data.username))
         .catch(err => console.log(err))
+    },[])
+
 
     async function getProblems() {
         //scan table createProblem
@@ -84,7 +87,6 @@ const App = () => {
                 logger.info('user signed up');
                 getUserGroup()
                 const g = localStorage.getItem("userGroup")
-                localStorage.setItem("total-problems", 0)
                 setUserGroup(g)
                 break;
 
