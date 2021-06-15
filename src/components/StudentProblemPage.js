@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import { API } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
@@ -6,26 +6,45 @@ import { Row, Col, Container } from 'react-bootstrap';
 import { useLocation } from "react-router-dom";
 
 function StudentProblemPage({ email }) {
-    const [CFFile, setCFFile] = useState("")
-    const [diagram, setDiagram] = useState("")
-    const textBoxData = useRef()
-    const [checkBoxData, setCheckBoxData] = useState(false)
-    const [problemName, setProblemName] = useState("")
-    var id = 9;
+    const [CFFile, setCFFile] = useState("");
+    const [fileContent, setFileContent] = useState("");
+    const [diagram, setDiagram] = useState("");
+    const textBoxData = useRef();
+    const [problemName, setProblemName] = useState("");
+    const date = Date.now();
+    const random = Math.floor(Math.random() * 100);
+    const id = random + date;
+    var reader = new FileReader();
     const { state } = useLocation();
+
+    //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
+    // for (var key in localStorage){
+    //     if (key.match(/AuthUser$/g)) {
+    //         email = localStorage.getItem(key)
+    //     }
+    // }
+    useEffect(() => {
+        
+        if(CFFile !== ""){
+        reader.readAsText(CFFile);
+        }
+    
+        reader.onload = function(e){
+        setFileContent(e.target.result);
+    }
+    }, [CFFile]);
 
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
         const studentSubmission = {
-            CFFile,
-            textBoxData: textBoxData.current.value,
-            checkBoxData,
+            CFFile: fileContent,
             problemName: state.value.problemName,
-            id,
-            instructorEmail: state.value.instructor_email
+            problem_id: id,
+            email
         }
-        console.log(studentSubmission)
+        console.log(studentSubmission);
+        console.log("State and it's value: ", state.value);
 
         const submissionForInstructor = {
             submission: CFFile,
@@ -51,9 +70,8 @@ function StudentProblemPage({ email }) {
 
 
         //TODO 
-
-        const apiName = "studentSubmissions"
-        const path = "/studentSubmissions"
+        const apiName = "studentSubmissionAPI"
+        const path = "/studentSubmission"
         const myInit = {
             body: studentSubmission
         }
@@ -92,7 +110,7 @@ function StudentProblemPage({ email }) {
                 <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Input Feedback</Form.Label>
                     <Form.Control ref={textBoxData} as="textarea" rows={3} />
-                    <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Instructor Review" />
+                    {/* <Form.Check onChange={e => setCheckBoxData(e.target.checked)} type="checkbox" label="Request Instructor Review" /> */}
                 </Form.Group>
                 <Form.Group>
                     <button className="submit" onClick={handleSubmit}>

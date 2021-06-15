@@ -20,15 +20,15 @@ const App = () => {
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
 
-     function getEmail(){
+    function getEmail() {
         Auth.currentAuthenticatedUser()
-        .then(data => setEmail(data.username))
-        .catch(err => console.log(err))
+            .then(data => setEmail(data.username))
+            .catch(err => console.log(err))
     }
 
     useEffect(() => {
         getEmail()
-    },[])
+    }, [])
 
 
     async function getProblems() {
@@ -70,8 +70,8 @@ const App = () => {
     }, [problems])
 
     function routeToCorrectHeader() {
-        if (userGroup === "Instructors") return <InstructorHeader email={email}/>
-        if (userGroup === "Students") return <StudentHeader email ={email}/>
+        if (userGroup === "Instructors") return <InstructorHeader email={email} />
+        if (userGroup === "Students") return <StudentHeader email={email} />
         else return null
     }
 
@@ -127,7 +127,7 @@ const App = () => {
             <Route exact={true} path="/home" render={props => <Home {...props} problems={problems} />} />
             <Route exact={true} path="/problems" render={props => <InstructorProblems {...props} email={email} />} />
             <Route exact={true} path="/problems/create-problem" component={CreateProblem} />
-            <Route exact={true} path="/studentproblems" component={StudentProblems} />
+            <Route exact={true} path="/studentproblems" render={props => <StudentProblems {...props} email={email} />} />
             <Route exact={true} path="/students" render={props => <InstructorsStudents {...props} email={email} />} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />
