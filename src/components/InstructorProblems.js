@@ -8,14 +8,13 @@ import { API, Storage } from "aws-amplify"
 
 function InstructorProblems({ email }) {
     const [rows, setRows] = useState([])
-    
 
-    async function getInstructorProblems(){
+    async function getInstructorProblems() {
         const myInit = {
             queryStringParameters: {
                 instructor_email: email
             }
-        } 
+        }
         try {
             let count = 1
             let res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)
@@ -24,38 +23,18 @@ function InstructorProblems({ email }) {
                 cv.diagram = await Storage.get(cv.diagramName)
                 return cv
             }))
-            console.log({res})
+            console.log({ res })
             setRows(res)
         }
-        catch(err) {
+        catch (err) {
             console.error("err: ", err)
 
         }
     }
-    // async function getInstructorProblem() {
-    //     const myInit = {
-    //         queryStringParameters: {
-    //             instructor_email: email,
-    //             problemID: 3
-    //         }
-    //     }
-    //     try {
-    //         const result = await API.get("instructorProblems", "/instructorProblems/object/:instructor_email/:problemID", myInit)
-    //         console.log("look here", result)
-    //     }
-    //     catch (err) {
-    //         console.error("err: ", err)
-    //     }
-    // }
 
     useEffect(() => {
         if (email !== "") getInstructorProblems()
-    },[email])
-    // useEffect(() => {
-    //     if (email !== "") getInstructorProblem()
-    // }, [email])
-
-
+    }, [email])
 
 
     const columns = [

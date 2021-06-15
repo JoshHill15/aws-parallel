@@ -13,12 +13,14 @@ import StudentProblems from './components/StudentProblems';
 import InstructorsStudents from './components/InstructorsStudents';
 import MyAccount from './components/MyAccount';
 import Problem from './components/Problem';
+import Submission from './components/Submission';
 
 const App = () => {
     const history = useHistory()
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
+    
 
     function getEmail() {
         Auth.currentAuthenticatedUser()
@@ -28,7 +30,6 @@ const App = () => {
 
     useEffect(() => {
         if (email === "") getEmail()
-        console.log("e", email)
     }, [email])
 
 
@@ -132,6 +133,9 @@ const App = () => {
             <Route exact={true} path="/students" render={props => <InstructorsStudents {...props} email={email} />} />
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />
+            <Route exact={true} path="/submissions/:id" render={props => <Submission {...props} email={email} />} />
+
+
         </div>
     );
 };

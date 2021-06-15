@@ -99,9 +99,9 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
   if (userIdPresent && req.apiGateway) {
     params[partitionKeyName] = req.apiGateway.event.requestContext.identity.cognitoIdentityId || UNAUTH;
   } else {
-    params[partitionKeyName] = req.params[partitionKeyName];
+    params[partitionKeyName] = req.query[partitionKeyName];
     try {
-      params[partitionKeyName] = convertUrlType(req.params[partitionKeyName], partitionKeyType);
+      params[partitionKeyName] = convertUrlType(req.query[partitionKeyName], partitionKeyType);
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
@@ -109,7 +109,7 @@ app.get(path + '/object' + hashKeyPath + sortKeyPath, function(req, res) {
   }
   if (hasSortKey) {
     try {
-      params[sortKeyName] = convertUrlType(req.params[sortKeyName], sortKeyType);
+      params[sortKeyName] = convertUrlType(req.query[sortKeyName], sortKeyType);
     } catch(err) {
       res.statusCode = 500;
       res.json({error: 'Wrong column type ' + err});
