@@ -45,18 +45,6 @@ function StudentHeader({ email }) {
             <Link className="links" to="/home">Home</Link>
             <Link className="links" to="/studentProblems">Problems</Link>
             <AmplifySignOut />
-            <Avatar aria-haspopup="true" aria-controls="simple-menu" onClick={handleClick} className={classes.orange}>MC</Avatar>
-            <Menu id="simple-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <Link className="links" style={{ textDecoration: 'none' }} to="/myaccount">
-                    <MenuItem style={{ paddingLeft: 13 }} onClick={handleClose}>My Account</MenuItem>
-                </Link>
-            </Menu>
             <p className="user-email">Welcome, {email}</p>
 
         </div>
