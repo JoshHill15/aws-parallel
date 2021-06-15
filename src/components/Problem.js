@@ -28,15 +28,15 @@ function Problem({ userGroup, email }) {
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
-        const studentSubmission = {
-            CFFile,
-            textBoxData: textBoxData.current.value,
-            checkBoxData,
-            problemName: state.value.problemName,
-            id,
-            instructorEmail: state.value.instructor_email
-        }
-        console.log(studentSubmission)
+        // const studentSubmission = {
+        //     CFFile,
+        //     textBoxData: textBoxData.current.value,
+        //     checkBoxData,
+        //     problemName: state.value.problemName,
+        //     id,
+        //     email
+        // }
+        // console.log(studentSubmission)
 
         const submissionForInstructor = {
             submission: CFFile,
@@ -62,26 +62,26 @@ function Problem({ userGroup, email }) {
 
 
         //TODO 
-        const instructorApiName = "instructorProblems"
-        const instructorPath = "instructorProblems/"
-        const apiName = "studentSubmissions"
-        const path = "/studentSubmissions"
-        const myInit = {
-            body: studentSubmission
-        }
-        API.post(apiName, path, myInit)
-            .then(response => {
-                console.log({ response })
-            })
-            .catch(error => {
-                console.log(error.response)
-            })
-        textBoxData.current.value = ""
-        setProblemName("")
+        // const instructorApiName = "instructorProblems"
+        // const instructorPath = "instructorProblems/"
+        // const apiName = "studentSubmissionsAPI"
+        // const path = "/studentSubmission"
+        // const myInit = {
+        //     body: studentSubmission
+        // }
+        // API.post(apiName, path, myInit)
+        //     .then(response => {
+        //         console.log({ response })
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response)
+        //     })
+        // textBoxData.current.value = ""
+        // setProblemName("")
     };
     return (
         <div className="container">
-            {userGroup === 'Students' ? <StudentProblemPage />: <InstructorProblemPage />}
+            {userGroup === 'Students' ? <StudentProblemPage email={email} />: <InstructorProblemPage />}
             
         </div>
     )

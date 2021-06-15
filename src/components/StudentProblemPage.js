@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import { Form } from 'react-bootstrap';
 import { API, Storage } from "aws-amplify"
 import Image from 'react-bootstrap/Image';
@@ -7,11 +7,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { useLocation } from "react-router-dom";
 
 function StudentProblemPage({ email }) {
-    const [CFFile, setCFFile] = useState("")
-    const [diagram, setDiagram] = useState("")
-    const textBoxData = useRef()
-    const [problemName, setProblemName] = useState("")
-    var id = 9;
+    const [CFFile, setCFFile] = useState("");
+    const [fileContent, setFileContent] = useState("");
+    const [diagram, setDiagram] = useState("");
+    const textBoxData = useRef();
+    const [problemName, setProblemName] = useState("");
+    const date = Date.now();
+    const random = Math.floor(Math.random() * 100);
+    const id = random + date;
+    var reader = new FileReader();
     const { state } = useLocation();
 
     //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
@@ -20,16 +24,28 @@ function StudentProblemPage({ email }) {
     //         email = localStorage.getItem(key)
     //     }
     // }
+    useEffect(() => {
+        
+        if(CFFile !== ""){
+        reader.readAsText(CFFile);
+        }
+    
+        reader.onload = function(e){
+        setFileContent(e.target.result);
+    }
+    }, [CFFile]);
+
     const handleSubmit = e => {
         //submit fields to lambda function
         e.preventDefault()
         const studentSubmission = {
-            CFFile,
+            CFFile: fileContent,
             problemName: state.value.problemName,
-            id,
-            instructorEmail: state.value.instructor_email
+            problem_id: id,
+            email
         }
-        console.log(studentSubmission)
+        console.log(studentSubmission);
+        console.log("State and it's value: ", state.value);
 
         const submissionForInstructor = {
             submission: CFFile,
