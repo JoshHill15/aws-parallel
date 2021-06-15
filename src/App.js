@@ -27,8 +27,9 @@ const App = () => {
     }
 
     useEffect(() => {
-        getEmail()
-    }, [])
+        if (email === "") getEmail()
+        console.log("e", email)
+    }, [email])
 
 
     async function getProblems() {

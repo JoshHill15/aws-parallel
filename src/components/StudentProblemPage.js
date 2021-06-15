@@ -17,12 +17,6 @@ function StudentProblemPage({ email }) {
     var reader = new FileReader();
     const { state } = useLocation();
 
-    //For loop to grab key with USER EMAIL value and assigns it to "var email" (from local storage)
-    // for (var key in localStorage){
-    //     if (key.match(/AuthUser$/g)) {
-    //         email = localStorage.getItem(key)
-    //     }
-    // }
     useEffect(() => {
         
         if(CFFile !== ""){
