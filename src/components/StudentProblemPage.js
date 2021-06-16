@@ -5,19 +5,17 @@ import Image from 'react-bootstrap/Image';
 import { Row, Col, Container } from 'react-bootstrap';
 import { useLocation } from "react-router-dom";
 
-function StudentProblemPage({ email }) {
+function StudentProblemPage({ email, setUserSubmission }) {
     const [CFFile, setCFFile] = useState("");
     const [fileContent, setFileContent] = useState("");
-    const [diagram, setDiagram] = useState("");
     const textBoxData = useRef();
-    const [problemName, setProblemName] = useState("");
     const date = Date.now();
     const random = Math.floor(Math.random() * 100);
     const id = random + date;
-    var reader = new FileReader();
     const { state } = useLocation();
 
     useEffect(() => {
+        const reader = new FileReader();
         
         if(CFFile !== ""){
         reader.readAsText(CFFile);
@@ -32,60 +30,69 @@ function StudentProblemPage({ email }) {
         //submit fields to lambda function
         e.preventDefault()
         const studentSubmission = {
-            CFFile: fileContent,
+            fileContent,
             problemName: state.value.problemName,
             problem_id: id,
-            email
+            email,
+            instructor_email: state.value.instructor_email
         }
         console.log(studentSubmission);
-        console.log("State and it's value: ", state.value);
 
-        const submissionForInstructor = {
-            submission: CFFile,
-            instructor_email: state.value.instructor_email,
-            grade: "N/A",
-            // instructorReview: checkBoxData.current.value,
-            studentsName: email,
-            problemName: state.value.problemName
+        // const submissionForInstructor = {
+        //     submission: CFFile,
+        //     instructor_email: state.value.instructor_email,
+        //     grade: "N/A",
+        //     // instructorReview: checkBoxData.current.value,
+        //     studentsName: email,
+        //     problemName: state.value.problemName
 
-        }
+        // }
 
-        const submissionBody = {
-            body: submissionForInstructor
-        }
+        // const submissionBody = {
+        //     body: submissionForInstructor
+        // }
 
-        API.post("studentProblems", "/studentProblems", submissionBody)
-            .then(response => {
-            })
-            .catch(error => {
-                console.log(error.response)
-            })
+        // API.post("studentProblems", "/studentProblems", submissionBody)
+        //     .then(response => {
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response)
+        //     })
 
+            const apiName = "comparisonfunction"
+            const path = "/comparisonfunction"
+            const myInit = {
+                body: studentSubmission
+            }
 
-
-        //TODO 
-        const apiName = "studentSubmissionAPI"
-        const path = "/studentSubmission"
-        const myInit = {
-            body: studentSubmission
-        }
-        API.post(apiName, path, myInit)
+            API.post(apiName, path, myInit)
             .then(response => {
                 console.log({ response })
+                setUserSubmission(response)
             })
             .catch(error => {
-                console.log(error.response)
+                console.log(error)
             })
+
+
+        // //TODO 
+        // const apiName = "studentSubmissionAPI"
+        // const path = "/studentSubmission"
+        // const myInit = {
+        //     body: studentSubmission
+        // }
+        // API.post(apiName, path, myInit)
+        //     .then(response => {
+        //         console.log({ response })
+        //     })
+        //     .catch(error => {
+        //         console.log(error.response)
+        //     })
         textBoxData.current.value = ""
-        setProblemName("")
     };
     return (
         <div className="container">
             <Form >
-                <Form.Group controlId="formBasicEmail">
-                    {/* <Form.Label>Problem Name</Form.Label>
-                    <Form.Control size='lg' value={problemName} onChange={e => setProblemName(e.target.value)} placeholder="Enter problem name" /> */}
-                </Form.Group>
                 <Form.Group>
                     <Form.Label>Scenario: </Form.Label>
                     <Form.Control plaintext readOnly defaultValue={state.value.problemName}></Form.Control>

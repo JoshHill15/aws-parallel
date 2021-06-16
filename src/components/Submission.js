@@ -6,25 +6,27 @@ function Submission({ email }){
     const { state } = useLocation()
     const [submission, setSubmission] = useState({})
 
-    async function getInstructorProblem() {
-        const myInit = {
-            queryStringParameters: {
-                email,
-                problem_id: state.problem_id
-            }
-        }
-        try {
-            const result = await API.get("studentSubmissionAPI", "/studentSubmission/object/:email/:problem_id", myInit)
-            setSubmission(result)
-        }
-        catch (err) {
-            console.error("err: ", err)
-        }
-    }
+
 
     useEffect(() => {
+        async function getInstructorProblem() {
+            const myInit = {
+                queryStringParameters: {
+                    email,
+                    problem_id: state.problem_id
+                }
+            }
+            try {
+                const result = await API.get("studentSubmissionAPI", "/studentSubmission/object/:email/:problem_id", myInit)
+                setSubmission(result)
+            }
+            catch (err) {
+                console.error("err: ", err)
+            }
+        }
+
         if (email !== "") getInstructorProblem()
-    },[email])
+    },[email, state.problem_id])
 
     return (
         <div>

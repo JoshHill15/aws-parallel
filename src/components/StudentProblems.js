@@ -6,26 +6,7 @@ import { Link } from "react-router-dom"
 function StudentProblems({ email }) {
     const [rows, setRows] = useState([])
 
-    async function getSubmittedProblems() {
-        const myInit = {
-            queryStringParameters: {
-                email: email
-            }
-        }
-        try {
-            let count = 1
-            let res = await API.get("studentSubmissionAPI", "/studentSubmission/:email", myInit)
-            console.log({ res })
-            res = res.map(cv => {
-                cv.id = count++
-                return cv
-            })
-            setRows(res)
-        } catch (e) {
-            console.log("errrr", e)
-        }
 
-    }
 
 
     const columns = [
@@ -43,6 +24,26 @@ function StudentProblems({ email }) {
     ]
 
     useEffect(() => {
+        async function getSubmittedProblems() {
+            const myInit = {
+                queryStringParameters: {
+                    email: email
+                }
+            }
+            try {
+                let count = 1
+                let res = await API.get("studentSubmissionAPI", "/studentSubmission/:email", myInit)
+                console.log({ res })
+                res = res.map(cv => {
+                    cv.id = count++
+                    return cv
+                })
+                setRows(res)
+            } catch (e) {
+                console.log("errrr", e)
+            }
+        }
+
         if (email !== "") getSubmittedProblems()
     }, [email])
 

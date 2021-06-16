@@ -20,7 +20,7 @@ const App = () => {
     const [userGroup, setUserGroup] = useState(null)
     const [problems, setProblems] = useState([])
     const [email, setEmail] = useState("")
-    
+    console.log(email)
 
     function getEmail() {
         Auth.currentAuthenticatedUser()
@@ -29,9 +29,8 @@ const App = () => {
     }
 
     useEffect(() => {
-        if (email === "") getEmail()
-    }, [email])
-
+        getEmail()
+    }, [])
 
     async function getProblems() {
         //scan table createProblem
@@ -69,7 +68,7 @@ const App = () => {
 
     useEffect(() => {
         getProblems()
-    }, [problems])
+    }, [])
 
     function routeToCorrectHeader() {
         if (userGroup === "Instructors") return <InstructorHeader email={email} />
@@ -134,8 +133,6 @@ const App = () => {
             <Route exact={true} path="/myaccount" component={MyAccount} />
             <Route exact={true} path="/problem/:id" render={props => <Problem {...props} userGroup={userGroup} email={email} />} />
             <Route exact={true} path="/submissions/:id" render={props => <Submission {...props} email={email} />} />
-
-
         </div>
     );
 };

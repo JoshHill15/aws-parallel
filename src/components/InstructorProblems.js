@@ -9,30 +9,32 @@ import { API, Storage } from "aws-amplify"
 function InstructorProblems({ email }) {
     const [rows, setRows] = useState([])
 
-    async function getInstructorProblems() {
-        const myInit = {
-            queryStringParameters: {
-                instructor_email: email
-            }
-        }
-        try {
-            let count = 1
-            let res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)
-            res = await Promise.all(res.map(async cv => {
-                cv.id = count++
-                cv.diagram = await Storage.get(cv.diagramName)
-                return cv
-            }))
-            console.log({ res })
-            setRows(res)
-        }
-        catch (err) {
-            console.error("err: ", err)
 
-        }
-    }
 
     useEffect(() => {
+        async function getInstructorProblems() {
+            const myInit = {
+                queryStringParameters: {
+                    instructor_email: email
+                }
+            }
+            try {
+                let count = 1
+                let res = await API.get("instructorProblems", "/instructorProblems/:instructor_email", myInit)
+                res = await Promise.all(res.map(async cv => {
+                    cv.id = count++
+                    cv.diagram = await Storage.get(cv.diagramName)
+                    return cv
+                }))
+                console.log({ res })
+                setRows(res)
+            }
+            catch (err) {
+                console.error("err: ", err)
+    
+            }
+        }
+
         if (email !== "") getInstructorProblems()
     }, [email])
 
@@ -43,7 +45,7 @@ function InstructorProblems({ email }) {
         { field: 'textBoxData', headerName: 'Problem Description', width: 300 },
         {
             field: 'diagram', headerName: 'Diagram', width: 300, renderCell: params => (
-                <img src={params.value} key={params.value} />
+                <img src={params.value} key={params.value} alt="diagram"/>
             )
         }
     ];

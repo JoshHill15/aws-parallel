@@ -6,25 +6,7 @@ import "../styles/InstructorStudents.css"
 function InstructorsStudents({ email }){
     const [rows, setRows] = useState([])
 
-    async function getStudentProblems() {
-        const myInit = {
-            queryStringParameters: {
-                instructor_email: email
-            }
-        }
-        try {
-            let count = 1
-            let res = await API.get("studentProblems", "/studentProblems/:instructor_email", myInit)
-            res = res.map(cv => {
-                cv.id = count++
-                return cv
-            })
-            setRows(res)
-        } catch (e) {
-            console.log("errrr", e)
-        }
 
-    }
 
     const downloadFile = async (myData) => {
         const fileName = "CFFILE";
@@ -51,6 +33,26 @@ function InstructorsStudents({ email }){
       ];
 
     useEffect(() => {
+        async function getStudentProblems() {
+            const myInit = {
+                queryStringParameters: {
+                    instructor_email: email
+                }
+            }
+            try {
+                let count = 1
+                let res = await API.get("studentProblems", "/studentProblems/:instructor_email", myInit)
+                res = res.map(cv => {
+                    cv.id = count++
+                    return cv
+                })
+                setRows(res)
+            } catch (e) {
+                console.log("errrr", e)
+            }
+    
+        }
+
         if (email !== "") getStudentProblems()
     }, [email])
 
